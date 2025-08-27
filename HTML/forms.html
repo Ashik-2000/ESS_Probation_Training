@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Practice</title>
+    </head>
+    <body>
+        <h1>Day 1: [08/21/2025]</h1>
+        <h2>*****Forms*****</h2>
+        <form>
+            <!-- Text field -->
+            <label for="fname">First name:</label><br />
+            <input
+                type="text"
+                id="fname"
+                placeholder="Enter your first name here"
+            /><br /><br />
+
+            <!-- Radio buttons -->
+            <input type="radio" id="Angular" name="used_frameworks" />
+            <label for="Angular">Angular</label><br />
+            <input type="radio" id="DotNet" name="used_frameworks" />
+            <label for="DotNet">DotNet</label><br />
+            <input type="radio" id="NextJs" name="used_frameworks" />
+            <label for="NextJs">NextJs</label><br /><br />
+
+            <!-- Submit buttons -->
+            <input type="submit" value="Submit" />
+
+            <h1>Day 2: [08/22/2025]</h1>
+            <h2>*****Forms*****</h2>
+
+            <!-- Select element -->
+            <select name="pick" id="pick" size="3" multiple>
+                <option value="banana">Banana</option>
+                <option value="apple">Apple</option>
+                <option value="pineapple" selected>Pineapple</option>
+                <option value="grapes">Grapes</option>
+                <option value="mango">Mango</option>
+                <option value="melons">Melons</option>
+                <option value="orange">Orange</option></select
+            ><br /><br />
+
+            <!-- Textarea -->
+            <label for="msg">Enter your message</label>
+            <textarea name="message" id="msg" rows="4" cols="30">
+This is a text area to input larger texts.</textarea
+            ><br /><br />
+
+            <!-- Button element -->
+            <button type="button" onclick="alert('Hello there!')">
+                Click me!</button
+            ><br /><br />
+
+            <!-- Fieldset element  -->
+            <fieldset>
+                <legend>Personalia:</legend>
+                <label for="fname">First name:</label><br />
+                <input
+                    type="text"
+                    id="fname"
+                    placeholder="Enter your first name here"
+                />
+                <br />
+                <label for="lname">Last name:</label><br />
+                <input
+                    type="text"
+                    id="lname"
+                    placeholder="Enter your last name here"
+                />
+                <br />
+                <br />
+                <input type="submit" value="Submit" />
+            </fieldset>
+            <br /><br />
+
+            <!-- Datalist element -->
+            <h1 style="color: red">
+                I've faced some problem with datalist element
+            </h1>
+
+            <!-- Input types -->
+            <label for="pwd">Password:</label><br />
+            <input type="password" id="pwd" name="pwd" /><br /><br />
+            <input type="reset" value="Reset" /><br /><br />
+
+            <!-- Checkbox Element -->
+            <input type="checkbox" id="Angular" name="used_frameworks" />
+            <label for="Angular">Angular</label><br />
+            <input type="checkbox" id="DotNet" name="used_frameworks" />
+            <label for="DotNet">DotNet</label><br />
+            <input type="checkbox" id="NextJs" name="used_frameworks" />
+            <label for="NextJs">NextJs</label><br /><br />
+
+            <!-- Color Type -->
+            <label for="favcolor">Select favourite color:</label>
+            <input type="color" id="favcolor" name="favcolor" /><br /><br />
+
+            <label for="birthday">Birthday</label>
+            <input
+                type="date"
+                name="birthday"
+                id="birthday"
+                min="2004-08-25"
+            /><br /><br />
+
+            <!-- Email type -->
+            <label for="email">Enter your Email</label>
+            <input type="email" name="email" id="email" /><br /><br />
+
+            <!-- Image type -->
+            <input
+                type="image"
+                src=""
+                alt="Submit"
+                width="48"
+                height="48"
+            /><br /><br />
+
+            <!-- File type -->
+            <label for="myfile">Select a file:</label>
+            <input type="file" name="myfile" id="myfile" /><br /><br />
+
+            <!-- Month type -->
+            <label for="bdaymonth">Birthday (month and year)</label>
+            <input type="month" name="bdaymonth" id="bdaymonth" /><br /><br />
+
+            <!-- Number type -->
+            <label for="num">Quantity (between 15 and 30)</label>
+            <input
+                type="number"
+                name="num"
+                id="num"
+                min="15"
+                max="30"
+            /><br /><br />
+
+            <!-- Range type -->
+            <label for="vol">Volume (between 0 and 10)</label>
+            <input
+                type="range"
+                name="vol"
+                id="vol"
+                min="2"
+                max="10"
+            /><br /><br />
+
+            <!-- Type time -->
+            <label for="appt">Select a time</label>
+            <input type="time" name="appt" id="appt" /><br /><br />
+
+            <!-- Url type -->
+            <label for="homepage">LinkedIn link</label>
+            <input type="url" id="homepage" name="homepage" /><br /><br />
+
+            <!-- Week type -->
+            <label for="week">Select a week:</label>
+            <input type="week" name="week" id="week" /><br /><br />
+        </form>
+    </body>
+</html>
