@@ -1,0 +1,27 @@
+-> How the web works [DNS & HTTP] = When we type a address (e.g., www.google.com) the browser uses DNS to find the IP Adress
+					of that specific server. After getting the IP Address broswers send the HTTP request
+					to the server containing out req and the server replies a HTTP response with HTML,
+					CSS, JavaScript and images & videos which our browser renders in the display.
+
+-> Critical Rendering Path = It's the process the browser goes through to turn HTML, CSS & JavaScript into a visible webpage.
+				i) HTML is loaded and parsed -> Browser reads the HTML and creates the structure called DOM
+				ii) CSS is loaded and parsed -> Browser reads CSS and creates the CSSOM.
+				iii) DOM + CSSOM + JS = render tree
+				iv) Browser calculate the layout using the render tree then pains the screen according the layout.
+
+-> WebPack & Vite = Back then we didn't have any native way to bind js files into moduler way, Webpack was used by developers to do this binding.
+			Then the import export was introduced that made the binding multiple js files faster. Then comes vite that enhances the 
+			js module powers into another level
+			
+
+-> ESLint : Is this a Linter for JS & TS, It analyzes your code to find syntax error, code quality issues, and styles violations
+		i) Catch syntax errors early
+		ii) enforece coding standards.
+		iii) Help with code consistency across a team.
+		iv) Can auto-fix some issues
+		v) Chekcs some logic like unused vars or functions.
+		
+-> Prettier : It automatically format your code to follow consistent style rules (indentations, spacing, line breaks etc)
+		i) Enforces consistent code style.
+		ii) Focuses on formatting, not code quality or errors.
+		iii) Works with many languages: JavaScript, TypeScript, HTML, CSS, JSON etc.

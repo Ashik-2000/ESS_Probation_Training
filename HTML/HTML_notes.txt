@@ -1,0 +1,54 @@
+-> Elements vs tags:
+	Tags: The start or closing code of a element. e.g: <p>, </p>, <img> 
+	Elements: Entire thing; from opening tag - content - closing tag. e.g: <p>Hello, there</p>
+
+-> In HTML form then name attribute is must in the input tag otherwise the input field will not be sent.
+
+-> The for attribute of <label> and the id of <input> should be same to work properly.
+
+
+-> form tag attributes:
+	action = what action would be done on submittng the form; the file that contains server-side
+		scripts is put in the action. On default the action is set to the current page.
+	target = This specifies where to display the response after subitting the form.
+		_blank - displayed in a new window or tab
+		_self - displayed in the current window.
+		by default it's set to _self
+	method = This specifies the http method to be used to submit the form. there are two methods
+		get - sends data through the url in name value pair. (Less secured cz its visible in the url)
+		post - sends data through the body of the http request. (more secured cz it's not shown in the url)  	
+	autocomplete = if on then browser will auto complete the values based on the previous values entered by then user if it submitted empty.
+	novalidate = A boolean attribute, specifies if the form data should be validated or not when submitted.
+	enctype = Specifies how the form-data should encoded when submitted [only when the method is POST]
+	
+
+-> There is a input type called hidden. It's used to add some data that can't be seen or modified by the user.
+
+-> Input attributes:
+	value = default value to sent on submit.
+	readonly = Make the field readonly, no modification but the value is sent on submit
+	disabled = Make the field disabled, unusable or un-clickable, the value won't be sent on submit
+	size = Set the with of the input field.
+	maxlength = Set the maximum number of character allowed in the input field.
+	min, max = set the minimum and maximum range for input types like; number, range, date, datetime-local, month, time and week.
+	multiple = Allows user to input more than one value in an input field specially for emai and file.
+	pattern = Specifies a regular expression which evaluates the field's value.
+	placeholder = Used to set a hint to describe what to input in the field.
+	required = Specifies an input field must be filled out before submitting the form.
+	autofocus = Specifies that an input field should automatically focused when the page loads.
+	list = Used to link the input field with the datalist elements options.
+	autocomplete = if on the users gets suggestions based on the previous types values. this attribute workes on
+			form, types; text, search, url, tel, email, password, datepickers, range, and color.
+
+
+
+-> Web API : These are browsers in built html api unlike the thrid party api's;
+	Geolocation API - This API is used to access the current location of the user; provides latitude & longitude.
+	Drag & Drop API - This API enables then drag-drop features in browsers.
+	Web Storage API - Aside from coockies This API lets browsers store key/value pairs; This provides two types of storage.
+		-> LocalStorage : Stores data for long time (days, weeks, months)
+		-> SessionStorage : Stores data for short time; Closing the tab would cause the storage cleaned up.
+	Web Workers -> This API enables JavaScripts to operate like a multi thread langauge. Enables browers to run a operation in the background 
+			and do other operation during previous was in running.
+	SSE -> Server-Sent Events API enables webpages to get automatically updated wihtout doing any fetching req to the server. Server automatically
+		sends the updated data and don't need any http request for such response. Usefull for news headlines , stocks and sport info.
