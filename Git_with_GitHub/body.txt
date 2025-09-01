@@ -1,5 +1,5 @@
-Hellow, This is the main branch.....
-Header section of the webpage
+Hello, This is the main branch.....
+body section of the webpage
 
 1) Apple
 2) Orange
