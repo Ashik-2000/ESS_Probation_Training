@@ -1,5 +1,3 @@
-Adding a ttile....
-
 -> How the web works [DNS & HTTP] = When we type a address (e.g., www.google.com) the browser uses DNS to find the IP Adress
 					of that specific server. After getting the IP Address broswers send the HTTP request
 					to the server containing out req and the server replies a HTTP response with HTML,
