@@ -3,11 +3,11 @@
 					to the server containing out req and the server replies a HTTP response with HTML,
 					CSS, JavaScript and images & videos which our browser renders in the display.
 
--> Critical Rendering Path = It's the process the browser goes through to turn HTML, CSS & JavaScript into a visible webpage.
+-> Critical Rendering Path = It's the process which the browser goes through to turn HTML, CSS & JavaScript into a visible webpage.
 				i) HTML is loaded and parsed -> Browser reads the HTML and creates the structure called DOM
 				ii) CSS is loaded and parsed -> Browser reads CSS and creates the CSSOM.
 				iii) DOM + CSSOM + JS = render tree
-				iv) Browser calculate the layout using the render tree then pains the screen according the layout.
+				iv) Browser calculate the layout using the render tree then paints the screen according the layout.
 
 -> WebPack & Vite = Back then we didn't have any native way to bind js files into moduler way, Webpack was used by developers to do this binding.
 			Then the import export was introduced that made the binding multiple js files faster. Then comes vite that enhances the 
