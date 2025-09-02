@@ -1,0 +1,25 @@
+********** Strict **********
+"use strict";
+put this at top of the file or we can write it inside a function that, strick mode will be applied on the function locally rather than
+globally in the whole file.
+e.g:
+function myfunc(){
+    "use strick";
+}
+-> Undeclared variables and objects
+-> Mistyping a variable names
+-> Accidently creating a global variable
+-> Assigning variable to non-writable properties
+-> Deleting a variable or object or function
+-> Duplicating a parameter name
+-> Writing read only / get only properties
+-> eval / arguments cannot be used as variables
+-> using keywords that are reserved for future javascript versions.
+
+
+********** Scope **********
+It basically is the accessibility of the 
+There three types of scopes in javascript:
+i) Function scope: Variable declared locally in the function. Can't access these variables from outside of the function.
+ii) Block scope: Variables inside {} like class, if-else; Can't access from outside unless declared by var.
+iii) Global scope: variables declared outside any kind of {}. These variables can be access from anywhere in the document.
