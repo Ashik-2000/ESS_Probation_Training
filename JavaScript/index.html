@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DOM manipulation</title>
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+    </head>
+    <body>
+        <section>
+            <h1>TO-DO APP</h1>
+            <form class="new-task-container box">
+                <label for="new-task">Add new Task</label>
+                <input type="text" id="new-task" />
+                <button id="addTask">Add Task</button>
+            </form>
+            <div class="todo-list box">
+                <h2 id="heading">Incomplete Tasks</h2>
+                <ul id="items"> 
+                    <li class="item">
+                        <input type="checkbox" />
+                        <label>Task Name</label>
+                        <button class="update">Update</button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <script src="dom.js"></script>
+    </body>
+</html>
