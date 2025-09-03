@@ -1,4 +1,3 @@
-Hello, This is the main branch.....
 body section of the webpage
 
 1) Apple
