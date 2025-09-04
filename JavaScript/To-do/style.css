@@ -1,0 +1,108 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Form Section */
+.formSection {
+    text-align: center;
+    padding: 20px;
+    background: #f5f7fa;
+    border-bottom: 2px solid #ddd;
+}
+
+.formSection h1 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #333;
+}
+
+.label {
+    margin-bottom: 8px;
+    margin-right: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+#inputTask {
+    padding: 8px 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.btn {
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* Task Section */
+.taskSection {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: #fff;
+}
+
+/* Incomplete & Complete Task Containers */
+.incompleteTask,
+.completeTask {
+    width: 45%;
+    padding: 15px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.taskTitles {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    text-transform: uppercase;
+}
+
+/* Task Lists */
+.tasks {
+    list-style: none;
+    padding: 0;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.task label,
+.task p {
+    color: #444;
+    flex: 1;
+    margin-left: 8px;
+}
+
+/* Delete Button */
+.dlt {
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+.dlt:hover {
+    background-color: #c0392b;
+}
