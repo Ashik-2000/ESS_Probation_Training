@@ -1,8 +1,5 @@
-const grandpa = document.querySelector(".todo-list")
-const parent = grandpa.children;
-const childs = parent[1].children
-
-const childs2 = grandpa.querySelectorAll(".item");
-
-console.log(childs);
-console.log(childs2);
+const child = document.querySelector(".item");
+const parent = child.parentElement;
+const grandpa = child.closest(".box");
+console.log(parent);
+console.log(grandpa);
