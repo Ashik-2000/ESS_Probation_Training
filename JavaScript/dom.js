@@ -1,5 +1,6 @@
 const child = document.querySelector(".item");
-const parent = child.parentElement;
-const grandpa = child.closest(".box");
-console.log(parent);
-console.log(grandpa);
+const childNext = child.nextElementSibling;
+const childPrev = childNext.previousElementSibling;
+
+childNext.style.color = "red";
+childPrev.style.color = "red";
