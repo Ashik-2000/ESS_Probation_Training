@@ -1,6 +1,15 @@
-const child = document.querySelector(".item");
-const childNext = child.nextElementSibling;
-const childPrev = childNext.previousElementSibling;
+const newElement = document.createElement("div");
 
-childNext.style.color = "red";
-childPrev.style.color = "red";
+newElement.className = "red";
+
+newElement.setAttribute("id", "red");
+
+console.log(newElement);
+
+newElement.innerHTML = "Hello, Guys";
+
+const container = document.querySelector(".todo-list");
+const firstElement = document.querySelector("#heading");
+
+// container.insertBefore(newElement, firstElement)
+container.appendChild(newElement)
