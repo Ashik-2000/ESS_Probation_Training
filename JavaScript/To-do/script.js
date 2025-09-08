@@ -6,7 +6,7 @@ let completeUL = document.querySelector(".completeTask ul");
 // Function to create new li items using the input.
 function createTask(task) {
     const listItem = document.createElement("li");
-    listItem.className = "task"; // ✅ Added class for consistent styling
+    listItem.className = "task";
 
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");

@@ -18,7 +18,7 @@ function myfunc(){
 
 
 ********** Scope **********
-It basically is the accessibility of the 
+It basically is the accessibility [visibility] of the variables.
 There three types of scopes in javascript:
 i) Function scope: Variable declared locally in the function. Can't access these variables from outside of the function.
 ii) Block scope: Variables inside {} like class, if-else; Can't access from outside unless declared by var.
