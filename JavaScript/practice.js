@@ -35,8 +35,32 @@
 
 // console.log(reverseArr(num3));
 
-for (var i = 0; i < 3; i++) {
-    ((j) => {
-        setTimeout(() => console.log("C:", j), 100);
-    })(i);
-}
+// function outer() {
+//     var arr = [];
+//     for (var i = 0; i < 3; i++) {
+//         arr.push(function () {
+//             return i;
+//         });
+//     }
+//     return arr;
+// }
+
+// var funcns = outer();
+// console.log(funcns[0]());
+// console.log(funcns[1]());
+// console.log(funcns[2]());
+
+// let text = "Visit W3Schools";
+// let n = text.match(/W3schools/i);
+
+// console.log(n);
+
+// let text = "Visit Microsoft!";
+// let result = text.replace(/Microsoft/i, "W3Schools");
+
+// console.log(result);
+
+let text = "Visit W3Schools";
+let n = text.search(/W3Schools/);
+
+console.log(n);
