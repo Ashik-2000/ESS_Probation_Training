@@ -68,7 +68,10 @@
 // Promise.resolve().then(() => console.log("D"));
 // console.log("E");
 
-const nums = [1, 2, 3];
-const res1 = nums.forEach(n => n * 2);
-const res2 = nums.map(n => n * 2);
-console.log(res1, res2);
+// const nums = [1, 2, 3];
+// const res1 = nums.forEach(n => n * 2);
+// const res2 = nums.map(n => n * 2);
+// console.log(res1, res2);
+
+
+
