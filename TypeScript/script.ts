@@ -1,5 +1,18 @@
-var greetings: string = "Hello TypeScript";
-console.log(greetings.toLocaleUpperCase());
-var userID: number = 5222.25546;
-console.log(userID);
-// export {};
+type User = {
+    readonly id: number,
+    name: string,
+    email: string,
+    isActive: boolean,
+    address?: string
+};
+
+const myUser: User = {
+    id: 155,
+    name: "Ashik",
+    email: "ashik@gmail.com",
+    isActive: false
+}
+
+
+
+export {};

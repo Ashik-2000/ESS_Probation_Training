@@ -1,5 +1,8 @@
-var greetings = "Hello TypeScript";
-console.log(greetings.toLocaleUpperCase());
-var userID = 5222.25546;
-console.log(userID);
-// export {};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var myUser = {
+    id: 155,
+    name: "Ashik",
+    email: "ashik@gmail.com",
+    isActive: false
+};
