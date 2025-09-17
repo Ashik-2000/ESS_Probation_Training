@@ -73,5 +73,6 @@
 // const res2 = nums.map(n => n * 2);
 // console.log(res1, res2);
 
+const obj = {};
 
-
+console.log((obj["AISLE"] = 0));
