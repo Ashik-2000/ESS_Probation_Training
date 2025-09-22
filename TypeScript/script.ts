@@ -42,13 +42,11 @@
     // let [x, y] = swap("10", 20);
 
     // console.log(x, y);
-
-
-    function isEven(num: unknown) {
-        if (typeof num == "number") {
-            return num % 2 === 0 ? "true" : "false";
-        }
+    function combine(a: number, b: number): number;
+    function combine(a: string, b: string): string;
+    function combine(a: any, b: any) {
+        return a + b;
     }
 
-    isEven("a");
+    console.log(combine(1, "oops"));
 }
