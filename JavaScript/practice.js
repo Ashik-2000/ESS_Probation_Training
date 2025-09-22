@@ -73,6 +73,16 @@
 // const res2 = nums.map(n => n * 2);
 // console.log(res1, res2);
 
-const obj = {};
+class Animal {
+    constructor(name) {
+        this.name = name
+    }
+}
 
-console.log((obj["AISLE"] = 0));
+class Cat extends Animal{
+    legs = 4
+}
+
+const myCat = new Cat("cat");
+
+console.log(myCat.name)
