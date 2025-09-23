@@ -42,12 +42,11 @@
     // let [x, y] = swap("10", 20);
 
     // console.log(x, y);
-    function combine(a: number, b: number): number;
-    function combine(a: string, b: string): string;
-    function combine(a: number, b: string): string;
-    function combine(a: any, b: any) {
-        return a + b;
+    enum names {
+        Ashik = "ashik",
+        John = "john",
+        Vicky = 1,
     }
-
-    console.log(typeof combine(1, "oops",));
+    console.log(names["Ashik"]);
+    console.log(names["1"]);
 }
