@@ -1,31 +1,33 @@
-// interface Family {
-//     id: number;
-//     name: string;
-//     area: string;
-// }
+type Fish = { swim: () => void };
+type Bird = { fly: () => void };
 
-// interface Message {
-//     showMessage(): void;
-// }
+let fish = {
+    swim() {
+        console.log("Swimming");
+    },
+};
 
-abstract class Family {
-    constructor(public id: number, public name: string, public area: string) { }
+let bird = {
+    fly() {
+        console.log("Swimming");
+    },
+};
+
+function isFish(pet: Fish | Bird): pet is Fish {
+    return (pet as Fish).swim !== undefined;
 }
 
-class Cousins implements Family {
-    constructor(
-        public id: number,
-        public name: string,
-        public area: string,
-        public relation: string
-    ) {}
-    showMessage(): void {
-        console.log(
-            `${this.name} is my ${this.relation} who lives in ${this.area}.`
-        );
+function getFood(pet: Fish | Bird) {
+    if (isFish(pet)) {
+        pet;
+        return "fish food";
+    } else {
+        pet;
+        return "bird food";
     }
 }
 
-const member1 = new Cousins(5, "Rafina", "Mirpur", "sister");
+console.log(getFood(fish));
 
-member1.showMessage();
+console.log(isFish(fish));
+console.log(isFish(bird));

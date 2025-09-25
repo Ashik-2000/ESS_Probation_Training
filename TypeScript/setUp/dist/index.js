@@ -1,36 +1,27 @@
-// interface Family {
-//     id: number;
-//     name: string;
-//     area: string;
-// }
-// interface Message {
-//     showMessage(): void;
-// }
-class Family {
-    id;
-    name;
-    area;
-    constructor(id, name, area) {
-        this.id = id;
-        this.name = name;
-        this.area = area;
+let fish = {
+    swim() {
+        console.log("Swimming");
+    },
+};
+let bird = {
+    fly() {
+        console.log("Swimming");
+    },
+};
+function isFish(pet) {
+    return pet.swim !== undefined;
+}
+function getFood(pet) {
+    if (isFish(pet)) {
+        pet;
+        return "fish food";
+    }
+    else {
+        pet;
+        return "bird food";
     }
 }
-class Cousins {
-    id;
-    name;
-    area;
-    relation;
-    constructor(id, name, area, relation) {
-        this.id = id;
-        this.name = name;
-        this.area = area;
-        this.relation = relation;
-    }
-    showMessage() {
-        console.log(`${this.name} is my ${this.relation} who lives in ${this.area}.`);
-    }
-}
-const member1 = new Cousins(5, "Rafina", "Mirpur", "sister");
-member1.showMessage();
+console.log(getFood(fish));
+console.log(isFish(fish));
+console.log(isFish(bird));
 export {};
