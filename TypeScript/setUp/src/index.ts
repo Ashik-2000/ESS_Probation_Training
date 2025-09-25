@@ -1,33 +1,58 @@
-type Fish = { swim: () => void };
-type Bird = { fly: () => void };
-
-let fish = {
-    swim() {
-        console.log("Swimming");
-    },
-};
-
-let bird = {
-    fly() {
-        console.log("Swimming");
-    },
-};
-
-function isFish(pet: Fish | Bird): pet is Fish {
-    return (pet as Fish).swim !== undefined;
+interface Circle {
+    kind: "circle";
+    radius: number;
 }
 
-function getFood(pet: Fish | Bird) {
-    if (isFish(pet)) {
-        pet;
-        return "fish food";
-    } else {
-        pet;
-        return "bird food";
+interface Square {
+    kind: "square";
+    sideLength: number;
+}
+
+interface Triangle {
+    kind: "triangle";
+    base: number;
+    height: number;
+}
+
+function getArea(shape: Circle | Square | Triangle) {
+    switch (shape.kind) {
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+        case "square":
+            return shape.sideLength ** 2;
+        case "triangle":
+            return 0.5 * shape.base * shape.height;
+        default:
+            const _exhaustiveCheck: never = shape;
+            return _exhaustiveCheck;
     }
 }
 
-console.log(getFood(fish));
+// interface Shape {
+//     kind: "circle" | "square" | "triangle";
+//     radius?: number;
+//     sideLength?: number;
+//     base?: number;
+//     height?: number;
+// }
 
-console.log(isFish(fish));
-console.log(isFish(bird));
+// function getArea(shape: Shape) {
+//     switch (shape.kind) {
+//         case "circle":
+//             return Math.PI * shape.radius ** 2;
+//         case "square":
+//             return shape.sideLength ** 2;
+//         case "triangle":
+//             return 0.5 * shape.base * shape.height;
+//         default:
+//             const _exhaustiveCheck: never = shape;
+//             return _exhaustiveCheck;
+//     }
+// }
+
+console.log(
+    getArea({
+        kind: "square",
+        sideLength: 5,
+    })
+);
