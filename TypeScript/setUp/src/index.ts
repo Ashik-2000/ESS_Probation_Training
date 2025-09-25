@@ -1,58 +1,52 @@
-interface Circle {
-    kind: "circle";
-    radius: number;
+interface Assignment {
+    studentID: string;
+    title: string;
+    grade: number;
+    idPass?: boolean;
 }
 
-interface Square {
-    kind: "square";
-    sideLength: number;
+type Shapes = "circle" | "triangle" | "square" | "Rect" | "Eclips";
+
+interface ShapeProperties {
+    radius?: number;
+    sideLength?: number;
+    base?: number;
+    height?: number;
 }
 
-interface Triangle {
-    kind: "triangle";
-    base: number;
-    height: number;
+const updateAssignment = (
+    assign: Assignment,
+    propsToUpdate: Partial<Assignment>
+) => {
+    return { ...assign, ...propsToUpdate };
+};
+
+const assign1: Readonly<Assignment> = {
+    studentID: "ab30",
+    title: "Mid Term",
+    grade: 45,
+};
+
+console.log(updateAssignment(assign1, { idPass: false }));
+
+const shapeList: Record<Shapes, ShapeProperties> = {
+    circle: { radius: 5 },
+    Eclips: { radius: 5 },
+    square: { sideLength: 5 },
+    Rect: { sideLength: 5 },
+    triangle: { base: 5, height: 10 },
+};
+
+interface ShapeList {
+    circle: { radius: 5 };
+    Eclips: { radius: 5 };
+    square: { sideLength: 5 }; 
+    Rect: { sideLength: 5 };
+    triangle: { base: 5; height: 10 };
 }
 
-function getArea(shape: Circle | Square | Triangle) {
-    switch (shape.kind) {
-        case "circle":
-            return Math.PI * shape.radius ** 2;
-        case "square":
-            return shape.sideLength ** 2;
-        case "triangle":
-            return 0.5 * shape.base * shape.height;
-        default:
-            const _exhaustiveCheck: never = shape;
-            return _exhaustiveCheck;
-    }
-}
-
-// interface Shape {
-//     kind: "circle" | "square" | "triangle";
-//     radius?: number;
-//     sideLength?: number;
-//     base?: number;
-//     height?: number;
-// }
-
-// function getArea(shape: Shape) {
-//     switch (shape.kind) {
-//         case "circle":
-//             return Math.PI * shape.radius ** 2;
-//         case "square":
-//             return shape.sideLength ** 2;
-//         case "triangle":
-//             return 0.5 * shape.base * shape.height;
-//         default:
-//             const _exhaustiveCheck: never = shape;
-//             return _exhaustiveCheck;
-//     }
-// }
-
-console.log(
-    getArea({
-        kind: "square",
-        sideLength: 5,
-    })
-);
+type circularValue = Pick<ShapeList, "circle" | "Rect">;
+type circularShapes = Extract<Shapes, "circle" | "Eclips">
+type squareValue = Omit<ShapeList, "circle" | "Rect">;
+type sqaureShapes = Exclude<Shapes, "circle" | "Eclips">
+type namesOnly = NonNullable<Shapes>
