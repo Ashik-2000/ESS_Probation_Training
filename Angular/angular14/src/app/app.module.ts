@@ -6,6 +6,6 @@ import { BooksComponent } from './books/books.component';
 @NgModule({
   declarations: [AppComponent, BooksComponent],
   imports: [BrowserModule],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent], // lists all the components which should be knonw to Angular, at the point of time, it analyzes our index.html file
 })
 export class AppModule {}
