@@ -17,21 +17,35 @@ function enroll() {
     return promise;
 }
 
-function progress() {
-    console.log("Course on progress....");
-    const promise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (marks >= 80) {
-                resolve();
-            } else {
-                reject(
-                    "You could not get enough marks to get the certificate."
-                );
-            }
-        }, 3000);
-    });
+// function progress() {
+//     console.log("Course on progress....");
+//     const promise = new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             if (marks >= 80) {
+//                 resolve();
+//             } else {
+//                 reject(
+//                     "You could not get enough marks to get the certificate."
+//                 );
+//             }
+//         }, 3000);
+//     });
 
-    return promise;
+//     return promise;
+// }
+async function progress() {
+    console.log("Course on progress....");
+
+    // Wait for 3 seconds
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    if (marks >= 80) {
+        return; // resolves (undefined)
+    } else {
+        throw new Error(
+            "You could not get enough marks to get the certificate."
+        );
+    }
 }
 
 function getCertificate() {
