@@ -1,5 +1,22 @@
 <h1>Hello, This is main App Component</h1>
+<!-- section 18 -->
+<!-- <hr />
+<app-servers></app-servers> -->
+<!-- section 21 -->
 <hr />
-<app-books></app-books>
-<hr />
-<app-servers></app-servers>
+<!-- data passing [parent -> child] & [child -> parent] -->
+<div class="container">
+  <app-cockpit
+    (serverCreated)="onServerAdded($event)"
+    (bluePrintCreated)="onBluePrintAdded($event)"
+  ></app-cockpit>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12">
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [element]="serverElement"
+      ></app-server-element>
+    </div>
+  </div>
+</div>

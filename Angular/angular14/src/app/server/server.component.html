@@ -1,4 +1,6 @@
-<h3 [ngStyle]="{ color: getColor() }">
+<h3
+  [ngStyle]="{ color: getColor() }"
+  [ngClass]="{ online: serverStatus === 'online' }"
+>
   Server with ID {{ serverID }} is {{ getServerStatus() }}
 </h3>
-<!-- <p [ngClass]="{ ngclass: serverStatus === 'online' }">This is for ngClass</p> -->
