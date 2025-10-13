@@ -5,7 +5,7 @@
 <!-- section 21 -->
 <hr />
 <!-- data passing [parent -> child] & [child -> parent] -->
-<div class="container">
+<!-- <div class="container">
   <app-cockpit
     (serverCreated)="onServerAdded($event)"
     (bluePrintCreated)="onBluePrintAdded($event)"
@@ -33,5 +33,29 @@
         </p> 
       </app-server-element>
     </div>
+  </div>
+</div> -->
+
+<!-- Assignment 4 -->
+<app-game-control
+  (intervalFired)="onIntervalFired($event)"
+  (resetGame)="resetGame()"
+></app-game-control>
+<br>
+<br>
+<div class="row">
+  <div class="col-6">
+    <h6 class="text-decoration-underline mb-1">Odd numbers</h6>
+    <app-odd
+      *ngFor="let oddNumber of oddNumbers"
+      [number]="oddNumber"
+    ></app-odd>
+  </div>
+  <div class="col-6">
+    <h6 class="text-decoration-underline mb-1">Even Numbers</h6>
+    <app-even
+      *ngFor="let evenNumber of evenNumbers"
+      [number]="evenNumber"
+    ></app-even>
   </div>
 </div>

@@ -27,7 +27,7 @@ export class AppComponent {
     });
   }
   onBluePrintAdded(bluePrintData: {
-    serverName: string; 
+    serverName: string;
     serverContent: string;
   }) {
     this.serverElements.push({
@@ -41,5 +41,20 @@ export class AppComponent {
   }
   onDestroyFirst() {
     this.serverElements.splice(0, 1);
+  }
+  // Assignment 4
+  oddNumbers: number[] = [];
+  evenNumbers: number[] = [];
+  onIntervalFired(firedNumber: number) {
+    if (firedNumber % 2 === 0) {
+      this.evenNumbers.push(firedNumber);
+    } else {
+      this.oddNumbers.push(firedNumber);
+    }
+    // console.log(firedNumber);
+  }
+  resetGame() {
+    this.evenNumbers = [];
+    this.oddNumbers = [];
   }
 }
