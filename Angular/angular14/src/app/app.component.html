@@ -2,9 +2,8 @@
 <!-- section 18 -->
 <!-- <hr />
 <app-servers></app-servers> -->
-<!-- section 21 -->
 <hr />
-<!-- data passing [parent -> child] & [child -> parent] -->
+<!-- section 21 : Data Binding Deep Dive-->
 <!-- <div class="container">
   <app-cockpit
     (serverCreated)="onServerAdded($event)"
@@ -30,14 +29,14 @@
           <em *ngIf="serverElement.type === 'blueprint'">{{
             serverElement.content
           }}</em>
-        </p> 
+        </p>
       </app-server-element>
     </div>
   </div>
 </div> -->
 
 <!-- Assignment 4 -->
-<app-game-control
+<!-- <app-game-control
   (intervalFired)="onIntervalFired($event)"
   (resetGame)="resetGame()"
 ></app-game-control>
@@ -58,4 +57,7 @@
       [number]="evenNumber"
     ></app-even>
   </div>
-</div>
+</div> -->
+
+<!-- Section 23: Directives Deep Dive -->
+<app-directives></app-directives>
