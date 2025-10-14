@@ -1,0 +1,15 @@
+<button
+  class="btn btn-success me-1"
+  (click)="onStartGame()"
+  [disabled]="gameOn"
+>
+  Start Game
+</button>
+<button
+  class="btn btn-danger mx-1"
+  (click)="onPauseGame()"
+  [disabled]="!gameOn"
+>
+  Pause Game
+</button>
+<button class="btn btn-warning ms-1" (click)="onResetGame()">Reset</button>
