@@ -3,61 +3,12 @@
 <!-- <hr />
 <app-servers></app-servers> -->
 <hr />
+
 <!-- section 21 : Data Binding Deep Dive-->
-<!-- <div class="container">
-  <app-cockpit
-    (serverCreated)="onServerAdded($event)"
-    (bluePrintCreated)="onBluePrintAdded($event)"
-  ></app-cockpit>
-  <hr />
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-primary" (click)="onChangeFirst()">
-        Change first element
-      </button>
-      <button class="btn btn-danger ms-2" (click)="onDestroyFirst()">
-        Destroy
-      </button>
-      <app-server-element
-        *ngFor="let serverElement of serverElements"
-        [name]="serverElement.name"
-      >
-        <p #contentParagraph>
-          <strong *ngIf="serverElement.type === 'server'" style="color: red">{{
-            serverElement.content
-          }}</strong>
-          <em *ngIf="serverElement.type === 'blueprint'">{{
-            serverElement.content
-          }}</em>
-        </p>
-      </app-server-element>
-    </div>
-  </div>
-</div> -->
+<!-- <app-databinding-deep-dive></app-databinding-deep-dive> -->
 
 <!-- Assignment 4 -->
-<!-- <app-game-control
-  (intervalFired)="onIntervalFired($event)"
-  (resetGame)="resetGame()"
-></app-game-control>
-<br>
-<br>
-<div class="row">
-  <div class="col-6">
-    <h6 class="text-decoration-underline mb-1">Odd numbers</h6>
-    <app-odd
-      *ngFor="let oddNumber of oddNumbers"
-      [number]="oddNumber"
-    ></app-odd>
-  </div>
-  <div class="col-6">
-    <h6 class="text-decoration-underline mb-1">Even Numbers</h6>
-    <app-even
-      *ngFor="let evenNumber of evenNumbers"
-      [number]="evenNumber"
-    ></app-even>
-  </div>
-</div> -->
+<!-- <app-assignment4></app-assignment4> -->
 
 <!-- Section 23: Directives Deep Dive -->
-<app-directives></app-directives>
+<!-- <app-directives></app-directives> -->

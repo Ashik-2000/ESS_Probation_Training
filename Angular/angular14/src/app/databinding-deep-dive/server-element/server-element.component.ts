@@ -45,7 +45,7 @@ export class ServerElementComponent
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit called');
+    console.log('ngOnInit called ' + this.name);
   }
 
   ngDoCheck(): void {
@@ -54,7 +54,7 @@ export class ServerElementComponent
 
   ngAfterContentInit(): void {
     console.log('ngAfterContentInit called');
-    console.log('Header Content: ' + this.heading.nativeElement.textContent); // This will show error, cz of the AfterView hasn't been initialized yet.
+    //console.log('Header Content: ' + this.heading.nativeElement.textContent); // This will show error, cz of the AfterView hasn't been initialized yet.
   }
 
   ngAfterContentChecked(): void {
@@ -64,7 +64,9 @@ export class ServerElementComponent
   ngAfterViewInit(): void {
     console.log('ngAfterViewInit called');
     console.log('Header Content: ' + this.heading.nativeElement.textContent);
-    console.log('Paragraph Content: ' + this.paragraph.nativeElement.textContent);
+    console.log(
+      'Paragraph Content: ' + this.paragraph.nativeElement.textContent
+    );
   }
 
   ngAfterViewChecked(): void {

@@ -1,1 +1,22 @@
-<p>assignment4 works!</p>
+<app-game-control
+  (intervalFired)="onIntervalFired($event)"
+  (resetGame)="resetGame()"
+></app-game-control>
+<br>
+<br>
+<div class="row">
+  <div class="col-6">
+    <h6 class="text-decoration-underline mb-1">Odd numbers</h6>
+    <app-odd
+      *ngFor="let oddNumber of oddNumbers"
+      [number]="oddNumber"
+    ></app-odd>
+  </div>
+  <div class="col-6">
+    <h6 class="text-decoration-underline mb-1">Even Numbers</h6>
+    <app-even
+      *ngFor="let evenNumber of evenNumbers"
+      [number]="evenNumber"
+    ></app-even>
+  </div>
+</div>
