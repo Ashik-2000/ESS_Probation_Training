@@ -16,6 +16,14 @@ import { DirectivesDeepDiveComponent } from './directives-deep-dive/directives-d
 import { UnlessDirective } from './directives-deep-dive/unless/unless.directive';
 import { ServerComponent } from './server/server.component';
 import { ServersComponent } from './servers/servers.component';
+import { AccountComponent } from './services-depedency-injection/account/account.component';
+import { NewAccountComponent } from './services-depedency-injection/new-account/new-account.component';
+import { ServicesDepedencyInjectionComponent } from './services-depedency-injection/services-depedency-injection.component';
+import { AccountsService } from './services-depedency-injection/services/account.service';
+import { LoggingService } from './services-depedency-injection/services/logging.service';
+import { Assignment5Component } from './assignment5/assignment5.component';
+import { ActiveUsersComponent } from './assignment5/active-users/active-users.component';
+import { InactiveUsersComponent } from './assignment5/inactive-users/inactive-users.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +42,14 @@ import { ServersComponent } from './servers/servers.component';
     BetterHighlightDirective,
     UnlessDirective,
     DatabindingDeepDiveComponent,
+    ServicesDepedencyInjectionComponent,
+    AccountComponent,
+    NewAccountComponent,
+    Assignment5Component,
+    ActiveUsersComponent,
+    InactiveUsersComponent,
   ],
+  providers: [AccountsService, LoggingService],
   imports: [BrowserModule, FormsModule], // Gives all the functionality we need to start our app.
   bootstrap: [AppComponent], // lists the component which can me mentioned in then index.html file and Angular Analyzes these at the starting of our project.
 })
