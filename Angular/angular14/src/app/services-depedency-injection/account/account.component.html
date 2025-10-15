@@ -1,0 +1,22 @@
+<div class="col-12 col-md-8 mb-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title mb-2">{{ account.name }}</h5>
+      <hr />
+      <p class="card-text">
+        This account is <b>{{ account.status }}</b>
+      </p>
+      <div class="d-flex gap-2">
+        <button class="btn btn-success" (click)="onSetTo('active')">
+          Set to active
+        </button>
+        <button class="btn btn-warning" (click)="onSetTo('inactive')">
+          Set to inactive
+        </button>
+        <button class="btn btn-secondary" (click)="onSetTo('unknown')">
+          Set to unknown
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
