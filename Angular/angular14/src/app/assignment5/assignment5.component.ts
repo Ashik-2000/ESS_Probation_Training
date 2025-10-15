@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { CounterService } from './service/counter.service';
+import { UsersService } from './service/users.sevice';
 
 @Component({
   selector: 'app-assignment5',
   templateUrl: './assignment5.component.html',
   styleUrls: ['./assignment5.component.css'],
+  providers: [UsersService, CounterService],
 })
 export class Assignment5Component implements OnInit {
-  constructor() {}
-  ngOnInit(): void {}
+  constructor(
+    private usersService: UsersService,
+    public counterService: CounterService
+  ) {}
+  activeUsers: string[] = [];
+  inactiveUsers: string[] = [];
 
-  activeUsers = ['Max', 'Anna'];
-  inactiveUsers = ['Chris', 'Manu'];
-
-  onSetToInactive(id: number) {
-    this.inactiveUsers.push(this.activeUsers[id]);
-    this.activeUsers.splice(id, 1);
-  }
-
-  onSetToActive(id: number) {
-    this.activeUsers.push(this.inactiveUsers[id]);
-    this.inactiveUsers.splice(id, 1);
+  ngOnInit(): void {
+    this.activeUsers = this.usersService.activeUsers;
+    this.inactiveUsers = this.usersService.inactiveUsers;
   }
 }

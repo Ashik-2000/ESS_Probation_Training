@@ -1,0 +1,108 @@
+									###### SETUP ######
+
+* CLI = Command Line Interface
+* Angular CLI (ng) is required to create, build, test, and run Angular applications.
+* Without CLI, you would need to manually configure:
+  * Project structure
+  * Webpack
+  * TypeScript
+  * Testing setup
+  
+* Angular has its official CLI: @angular/cli
+* React does not have an official CLI. Instead, it uses multiple project starters:
+  * CRA (npx)
+  * Vite
+  * Next.js
+
+## CLI INSTALL ##
+
+Command:
+npm install -g @angular/cli [installs the latest]
+npm install -g @angular/cli@14 [installs the version 14]
+
+ *For a version 14 Angular project we have to install the 14 version of CLI. And It's same for the other version as well.*
+
+Now, Every Angular version support distinct version of node and typescript. The required TypeScript get installed by default with the Angular project so, we don't have to worry
+about that. We just have to make sure our computer is running on the correct node version for the specific Angular project.
+
+For this we have to use a node version controler such as NVM, and swith the node version for different version of Angular.
+For example,
+
+## Our computer has node 22.18.0, this is compatible for Angular 20.
+	So, if we run: 
+		-> nvm current
+			22.18.0
+			
+		Now, install Angular CLI. *Node 20 support the latest Angular version.* So;
+		-> npm install -g @angular/cli
+		
+		This installs the Angular 20 CLI. we can check it by running;
+		-> ng --version
+			20.3.x
+			
+		Now, Create a Angular project;
+		-> ng new <project-name>
+		-> cd <project-name>
+		-> ng serve
+		
+		The projects should open in the 4200 port.
+
+## Now, to install a Angular-14 project. This is the tricky one. Because, our system is running on node-20 and Angular-14 is a very old version to be honest. To, do this first,
+   we have to install a compatible node version, which is 16 in this case.
+   
+   First, we install the Angular-16 using NVM;
+   -> nvm install 16
+   -> nvm list
+		*22.18.0 ( currently using )
+		 16.20.2
+		 
+	Switch to node-16
+	-> nvm use 16.20.0
+	-> node --version
+	
+	Install the Angular-14 CLI;
+	-> npm install -g @angular/cli@14
+	-> ng version
+		14.x.x
+	
+	Create Angular-14 project;
+	-> ng new <project name>
+	-> cd <project-name>
+	
+	Now, let's run the project
+	-> ng serve
+	
+	Now, comes the confusion. we're very likely to see and error on the command line like this;
+	[Symbol.dispose](): void;
+	Cannot find name 'Disposable'
+	Property 'dispose' does not exist
+	on type 'SymbolConstructor'
+	
+	This happens because our Angular project uses typescript 4.7. but the @types/node@16.18.163 files are too new to compile using the TS-4.7 compiler. We need @type/node@16.11.x
+	for this to work. So, we can do;
+	-> npm uninstall @types/node
+	-> npm install --save-dev @type/node@16.11.68
+	
+	This now, we have to delete and reinstall the dependencies to be safe.
+	-> npx rimraf node_modules
+	-> del package-lock.json
+	-> npm install
+	
+	Now, let's run the project again.
+	-> ng serve
+	
+	Now the project should run at 4200 port.
+	
+**To find the compatible node and typescript version for a angular version visit the angular github repository and package.json**
+
+
+									###### PROJECT STRUCTURE ######
+
+tsconfig.json -> Hold all the settings, rules or configuration of the main TypeScript compiler.
+tsconfig.app.json -> Holds current applicatoin's typescript configuration.
+tsconfig.spec.json -> TypeScript configuration for the testing.
+karma.conf.js -> Testing purpose
+angular.json -> More about the CLI
+main.ts -> main TS file.
+environment -> There are two different environment file. One for developing or debug another for production.
+polyfills.ts -> Browser information

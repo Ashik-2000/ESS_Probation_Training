@@ -1,0 +1,8 @@
+ngOnInit(){} --> Gets called every time the component get re-rendered. Components re-renders when a variable gets changed by value.
+ngOnChanges(changes: simpleChanges){} --> Get called every time any variable of that changes either by value or by reference. Only one with a parameter.
+ngDoCheck(){} --> Called whenever Angular checks for any changes.
+ngAfterContentInit(){} --> After <ng-content> initialized.
+ngViewInit(){} --> After ngAfterContentInit() gets called.
+ngAfterContentChecked(){} --> After ngDoCheck() gets called.
+ngAfterViewChecked(){} --> After ngAfterContentChecked gets called.
+ngOnDestroy(){} --> Gets called after anything gets, destroyed or removed from the DOM.
