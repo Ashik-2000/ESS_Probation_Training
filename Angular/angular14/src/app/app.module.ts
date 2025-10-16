@@ -7,6 +7,9 @@ import { Assignment4Component } from './assignment4/assignment4.component';
 import { EvenComponent } from './assignment4/even/even.component';
 import { GameControlComponent } from './assignment4/game-control/game-control.component';
 import { OddComponent } from './assignment4/odd/odd.component';
+import { ActiveUsersComponent } from './assignment5/active-users/active-users.component';
+import { Assignment5Component } from './assignment5/assignment5.component';
+import { InactiveUsersComponent } from './assignment5/inactive-users/inactive-users.component';
 import { CockpitComponent } from './databinding-deep-dive/cockpit/cockpit.component';
 import { DatabindingDeepDiveComponent } from './databinding-deep-dive/databinding-deep-dive.component';
 import { ServerElementComponent } from './databinding-deep-dive/server-element/server-element.component';
@@ -14,23 +17,29 @@ import { BasicHighlightDirective } from './directives-deep-dive/basic-highlight/
 import { BetterHighlightDirective } from './directives-deep-dive/better-highlight/better-highlight.directive';
 import { DirectivesDeepDiveComponent } from './directives-deep-dive/directives-deep-dive.component';
 import { UnlessDirective } from './directives-deep-dive/unless/unless.directive';
-import { ServerComponent } from './server/server.component';
-import { ServersComponent } from './servers/servers.component';
+
+import { HomeComponent } from './routing/home/home.component';
+import { RoutingComponent } from './routing/routing.component';
+import { EditServerComponent } from './routing/servers/edit-server/edit-server.component';
+import { ServerComponent } from './routing/servers/server/server.component';
+import { ServersComponent } from './routing/servers/servers.component';
+import { UserComponent } from './routing/users/user/user.component';
+import { UsersComponent } from './routing/users/users.component';
+import { ServerComponent18 } from './server18/server18.component';
+import { ServersComponent18 } from './servers18/servers18.component';
 import { AccountComponent } from './services-depedency-injection/account/account.component';
 import { NewAccountComponent } from './services-depedency-injection/new-account/new-account.component';
 import { ServicesDepedencyInjectionComponent } from './services-depedency-injection/services-depedency-injection.component';
 import { AccountsService } from './services-depedency-injection/services/account.service';
 import { LoggingService } from './services-depedency-injection/services/logging.service';
-import { Assignment5Component } from './assignment5/assignment5.component';
-import { ActiveUsersComponent } from './assignment5/active-users/active-users.component';
-import { InactiveUsersComponent } from './assignment5/inactive-users/inactive-users.component';
+import { ServersService } from './routing/servers/servers.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     BooksComponent,
-    ServerComponent,
-    ServersComponent,
+    ServerComponent18,
+    ServersComponent18,
     CockpitComponent,
     ServerElementComponent,
     Assignment4Component,
@@ -48,8 +57,15 @@ import { InactiveUsersComponent } from './assignment5/inactive-users/inactive-us
     Assignment5Component,
     ActiveUsersComponent,
     InactiveUsersComponent,
+    RoutingComponent,
+    UsersComponent,
+    UserComponent,
+    ServersComponent,
+    EditServerComponent,
+    ServerComponent,
+    HomeComponent,
   ],
-  providers: [AccountsService, LoggingService],
+  providers: [AccountsService, LoggingService, ServersService],
   imports: [BrowserModule, FormsModule], // Gives all the functionality we need to start our app.
   bootstrap: [AppComponent], // lists the component which can me mentioned in then index.html file and Angular Analyzes these at the starting of our project.
 })
