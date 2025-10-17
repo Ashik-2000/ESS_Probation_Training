@@ -1,4 +1,10 @@
 <b>app-home</b>
 <h4>Welcome to Server Manager 4.0</h4>
 <p>Manage your Servers and Users.</p>
-<button class="btn btn-primary" (click)="onLoadServers(1)">Load Servers 1</button>
+<div class="d-flex gap-3">
+  <button class="btn btn-primary" (click)="onLoadServers(2)">
+    Load Servers 1
+  </button>
+  <button class="btn btn-light" (click)="onlogin()">Login</button>
+  <button class="btn btn-light" (click)="onlogout()">Logout</button>
+</div>

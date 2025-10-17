@@ -18,9 +18,13 @@ import { BetterHighlightDirective } from './directives-deep-dive/better-highligh
 import { DirectivesDeepDiveComponent } from './directives-deep-dive/directives-deep-dive.component';
 import { UnlessDirective } from './directives-deep-dive/unless/unless.directive';
 
-import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthGuard } from './routing/auth-guard.service';
+import { AuthService } from './routing/auth.service';
 import { HomeComponent } from './routing/home/home.component';
+import { PageNotFoungComponent } from './routing/page-not-foung/page-not-foung.component';
 import { RoutingComponent } from './routing/routing.component';
+import { CanDeactivateGuard } from './routing/servers/edit-server/can-deactivate-guard';
 import { EditServerComponent } from './routing/servers/edit-server/edit-server.component';
 import { ServerComponent } from './routing/servers/server/server.component';
 import { ServersComponent } from './routing/servers/servers.component';
@@ -34,23 +38,6 @@ import { NewAccountComponent } from './services-depedency-injection/new-account/
 import { ServicesDepedencyInjectionComponent } from './services-depedency-injection/services-depedency-injection.component';
 import { AccountsService } from './services-depedency-injection/services/account.service';
 import { LoggingService } from './services-depedency-injection/services/logging.service';
-
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  {
-    path: 'users',
-    component: UsersComponent,
-    children: [{ path: ':id/:name', component: UserComponent }],
-  },
-  {
-    path: 'servers',
-    component: ServersComponent,
-    children: [
-      { path: ':id', component: ServerComponent },
-      { path: ':id/edit', component: EditServerComponent },
-    ],
-  },
-];
 
 @NgModule({
   declarations: [
@@ -82,12 +69,20 @@ const appRoutes: Routes = [
     EditServerComponent,
     ServerComponent,
     HomeComponent,
+    PageNotFoungComponent,
   ],
-  // AccountServices, LoggingService --> Section 25: Services and Dependency Injection
-  // ServerServices --> Section 27: Routing
-  providers: [AccountsService, LoggingService, ServersService],
+  providers: [
+    // Section 25: Services and Dependency Injection
+    AccountsService,
+    LoggingService,
+    // Section 27: Routing
+    ServersService,
+    AuthGuard,
+    AuthService,
+    CanDeactivateGuard,
+  ],
   // Gives all the functionality we need to start our app.
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [BrowserModule, FormsModule, AppRoutingModule],
   // lists the component which can me mentioned in then index.html file and Angular Analyzes these at the starting of our project.
   bootstrap: [AppComponent],
 })
