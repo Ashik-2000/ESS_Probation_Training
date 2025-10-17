@@ -24,7 +24,7 @@ export class UserComponent implements OnInit, OnDestroy {
     });
   }
 
-  // It doesn't necessay here cz Angular unsubscribe it on it's own, when we leave the component but for out custom observable we must have to do it.
+  // It doesn't necessary here cz, Angular unsubscribe it on it's own, when we leave the component but for out custom observable we must have to do it.
   ngOnDestroy() {
     this.paramSubscription.unsubscribe();
   }
