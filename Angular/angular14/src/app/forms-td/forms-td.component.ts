@@ -30,7 +30,7 @@ export class FormsTDComponent implements OnInit {
     this.signupForm.form.patchValue({
       userData: {
         username: suggestedName,
-      },
+      }, 
     });
   }
 

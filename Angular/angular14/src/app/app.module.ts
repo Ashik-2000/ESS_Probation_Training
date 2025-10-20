@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BooksComponent } from './assignment2/assignment2.component';
@@ -19,6 +19,7 @@ import { DirectivesDeepDiveComponent } from './directives-deep-dive/directives-d
 import { UnlessDirective } from './directives-deep-dive/unless/unless.directive';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FormsTDComponent } from './forms-td/forms-td.component';
 import { AuthGuard } from './routing/auth-guard.service';
 import { AuthService } from './routing/auth.service';
 import { HomeComponent } from './routing/home/home.component';
@@ -38,7 +39,7 @@ import { NewAccountComponent } from './services-depedency-injection/new-account/
 import { ServicesDepedencyInjectionComponent } from './services-depedency-injection/services-depedency-injection.component';
 import { AccountsService } from './services-depedency-injection/services/account.service';
 import { LoggingService } from './services-depedency-injection/services/logging.service';
-import { FormsTDComponent } from './forms-td/forms-td.component';
+import { FormsReactiveComponent } from './forms-reactive/forms-reactive.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { FormsTDComponent } from './forms-td/forms-td.component';
     HomeComponent,
     PageNotFoungComponent,
     FormsTDComponent,
+    FormsReactiveComponent,
   ],
   providers: [
     // Section 25: Services and Dependency Injection
@@ -84,7 +86,14 @@ import { FormsTDComponent } from './forms-td/forms-td.component';
     CanDeactivateGuard,
   ],
   // Gives all the functionality we need to start our app.
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    // For template driven forms
+    FormsModule,
+    // Reactive forms
+    ReactiveFormsModule,
+    AppRoutingModule,
+  ],
   // lists the component which can me mentioned in then index.html file and Angular Analyzes these at the starting of our project.
   bootstrap: [AppComponent],
 })
