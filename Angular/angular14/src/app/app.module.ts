@@ -38,6 +38,7 @@ import { NewAccountComponent } from './services-depedency-injection/new-account/
 import { ServicesDepedencyInjectionComponent } from './services-depedency-injection/services-depedency-injection.component';
 import { AccountsService } from './services-depedency-injection/services/account.service';
 import { LoggingService } from './services-depedency-injection/services/logging.service';
+import { FormsTDComponent } from './forms-td/forms-td.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { LoggingService } from './services-depedency-injection/services/logging.
     ServerComponent,
     HomeComponent,
     PageNotFoungComponent,
+    FormsTDComponent,
   ],
   providers: [
     // Section 25: Services and Dependency Injection
