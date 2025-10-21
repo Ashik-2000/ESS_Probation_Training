@@ -19,7 +19,10 @@ import { DirectivesDeepDiveComponent } from './directives-deep-dive/directives-d
 import { UnlessDirective } from './directives-deep-dive/unless/unless.directive';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FormsReactiveComponent } from './forms-reactive/forms-reactive.component';
 import { FormsTDComponent } from './forms-td/forms-td.component';
+import { PipesComponent } from './pipes/pipes.component';
+import { ShortenPipe } from './pipes/shorten.pipe';
 import { AuthGuard } from './routing/auth-guard.service';
 import { AuthService } from './routing/auth.service';
 import { HomeComponent } from './routing/home/home.component';
@@ -39,7 +42,7 @@ import { NewAccountComponent } from './services-depedency-injection/new-account/
 import { ServicesDepedencyInjectionComponent } from './services-depedency-injection/services-depedency-injection.component';
 import { AccountsService } from './services-depedency-injection/services/account.service';
 import { LoggingService } from './services-depedency-injection/services/logging.service';
-import { FormsReactiveComponent } from './forms-reactive/forms-reactive.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,9 @@ import { FormsReactiveComponent } from './forms-reactive/forms-reactive.componen
     PageNotFoungComponent,
     FormsTDComponent,
     FormsReactiveComponent,
+    PipesComponent,
+    ShortenPipe,
+    FilterPipe,
   ],
   providers: [
     // Section 25: Services and Dependency Injection

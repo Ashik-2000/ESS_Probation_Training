@@ -63,7 +63,7 @@ export class FormsReactiveComponent implements OnInit {
     (<FormArray>this.signupForm.get('hobbies'))?.push(control);
   }
 
-  // getting the controls from the FormArray
+  // getting the formControls from the FormArray
   get controls() {
     return (<FormArray>this.signupForm.get('hobbies')).controls;
   }
@@ -78,7 +78,7 @@ export class FormsReactiveComponent implements OnInit {
 
   // Custom Asynchronous validation
   forbiddenEmails(
-    // for Asynchronous validation, argument type shold be AbstractControl instead of FormControl
+    // In Asynchronous validation argument type shold be AbstractControl instead of FormControl
     control: AbstractControl
   ): Promise<{ [key: string]: boolean } | any> {
     const promise = new Promise<ValidationErrors | any>((resolve, reject) => {
@@ -88,7 +88,7 @@ export class FormsReactiveComponent implements OnInit {
         } else {
           resolve(null);
         }
-      }, 3000);
+      }, 1500);
     });
     return promise;
   }
