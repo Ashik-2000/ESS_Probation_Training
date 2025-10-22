@@ -6,3 +6,25 @@ ngViewInit(){} --> After ngAfterContentInit() gets called.
 ngAfterContentChecked(){} --> After ngDoCheck() gets called.
 ngAfterViewChecked(){} --> After ngAfterContentChecked gets called.
 ngOnDestroy(){} --> Gets called after anything gets, destroyed or removed from the DOM.
+
+
+Observale Operators:
+
+of
+from
+map()
+flatMap
+switchMap
+mergeMap
+filter
+takeUntil
+debounceTime
+distinct
+combineLatest
+forkJoin
+tap
+delay
+finalize
+retry
+catchError
+pipe
