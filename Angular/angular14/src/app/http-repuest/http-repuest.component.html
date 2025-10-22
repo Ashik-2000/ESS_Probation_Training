@@ -6,7 +6,7 @@
       <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
         <!-- Title Input -->
         <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
+          <label for="title" class="form-label fw-bold">Title</label>
           <input
             type="text"
             class="form-control"
@@ -19,7 +19,7 @@
 
         <!-- Content Textarea -->
         <div class="mb-3">
-          <label for="content" class="form-label">Content</label>
+          <label for="content" class="form-label fw-bold">Content</label>
           <textarea
             class="form-control"
             id="content"
@@ -66,7 +66,21 @@
   <!-- NO POSTS MESSAGE SECTION -->
   <div class="row">
     <div class="col-12 col-md-6 offset-md-3">
-      <p>No posts available!</p>
+      <p *ngIf="loadedPosts.length < 1 && !isFetching && !error">
+        No posts available!
+      </p>
+      <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching">
+        <li class="list-group-item" *ngFor="let post of loadedPosts">
+          <h4>{{ post.title }}</h4>
+          <p>{{ post.content }}</p>
+        </li>
+      </ul>
+      <p *ngIf="isFetching && !error">Loading...</p>
+      <div class="alert alert-danger" *ngIf="error">
+        <h1>An Error Occurred!</h1>
+        <p>{{ error }}</p>
+        <button class="btn btn-danger" (click)="onHandleError()">Okay</button>
+      </div>
     </div>
   </div>
 </div>

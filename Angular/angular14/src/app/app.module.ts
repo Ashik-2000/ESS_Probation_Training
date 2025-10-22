@@ -18,9 +18,11 @@ import { BetterHighlightDirective } from './directives-deep-dive/better-highligh
 import { DirectivesDeepDiveComponent } from './directives-deep-dive/directives-deep-dive.component';
 import { UnlessDirective } from './directives-deep-dive/unless/unless.directive';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsReactiveComponent } from './forms-reactive/forms-reactive.component';
 import { FormsTDComponent } from './forms-td/forms-td.component';
+import { HttpRepuestComponent } from './http-repuest/http-repuest.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { PipesComponent } from './pipes/pipes.component';
 import { ShortenPipe } from './pipes/shorten.pipe';
@@ -43,7 +45,6 @@ import { NewAccountComponent } from './services-depedency-injection/new-account/
 import { ServicesDepedencyInjectionComponent } from './services-depedency-injection/services-depedency-injection.component';
 import { AccountsService } from './services-depedency-injection/services/account.service';
 import { LoggingService } from './services-depedency-injection/services/logging.service';
-import { HttpRepuestComponent } from './http-repuest/http-repuest.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,8 @@ import { HttpRepuestComponent } from './http-repuest/http-repuest.component';
     ReactiveFormsModule,
     // Custom module for routing
     AppRoutingModule,
+    // Unlocks angular http features on the project
+    HttpClientModule,
   ],
   // lists the component which can me mentioned in then index.html file and Angular Analyzes these at the starting of our project.
   bootstrap: [AppComponent],
