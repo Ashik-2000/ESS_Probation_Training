@@ -27,7 +27,7 @@ export class PostService {
         }
       )
       .subscribe({
-        next: (responseData) => console.log(responseData),
+        // next: (responseData) => console.log(responseData),
         error: (error) => this.error.next(error.message),
       });
   }
@@ -68,13 +68,13 @@ export class PostService {
           observe: 'events',
         }
       )
-      .pipe(
-        tap((event) => {
-          console.log(event);
-          if (event.type === HttpEventType.Response) {
-            console.log(event.body);
-          }
-        })
-      );
+      // .pipe(
+      //   tap((event) => {
+      //     console.log(event);
+      //     if (event.type === HttpEventType.Response) {
+      //       console.log(event.body);
+      //     }
+      //   })
+      // );
   }
 }
