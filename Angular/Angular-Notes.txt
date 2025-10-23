@@ -12,7 +12,7 @@ Observale Operators:
 
 of
 from
-map()
+map() -> Receives individual item of a iterable
 flatMap
 switchMap
 mergeMap
@@ -22,9 +22,9 @@ debounceTime
 distinct
 combineLatest
 forkJoin
-tap
+tap() -> Receives event
 delay
 finalize
 retry
-catchError
+catchError() -> Receives error
 pipe
