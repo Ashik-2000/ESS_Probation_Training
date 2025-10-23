@@ -18,10 +18,11 @@ import { BetterHighlightDirective } from './directives-deep-dive/better-highligh
 import { DirectivesDeepDiveComponent } from './directives-deep-dive/directives-deep-dive.component';
 import { UnlessDirective } from './directives-deep-dive/unless/unless.directive';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsReactiveComponent } from './forms-reactive/forms-reactive.component';
 import { FormsTDComponent } from './forms-td/forms-td.component';
+import { AuthInterceptorService } from './http-repuest/auth-interceptor.service';
 import { HttpRepuestComponent } from './http-repuest/http-repuest.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { PipesComponent } from './pipes/pipes.component';
@@ -38,7 +39,7 @@ import { ServersComponent } from './routing/servers/servers.component';
 import { ServersService } from './routing/servers/servers.service';
 import { UserComponent } from './routing/users/user/user.component';
 import { UsersComponent } from './routing/users/users.component';
-import { ServerComponent18 } from './server18/server18.component';
+import { ServerComponent18 } from './servers18/server18/server18.component';
 import { ServersComponent18 } from './servers18/servers18.component';
 import { AccountComponent } from './services-depedency-injection/account/account.component';
 import { NewAccountComponent } from './services-depedency-injection/new-account/new-account.component';
@@ -93,17 +94,23 @@ import { LoggingService } from './services-depedency-injection/services/logging.
     AuthGuard,
     AuthService,
     CanDeactivateGuard,
+    // Section 36: Http Response
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
   ],
   // Gives all the functionality we need to start our app.
   imports: [
     BrowserModule,
-    // For template driven forms
+    // Section 31: [Froms] For template driven forms
     FormsModule,
-    // Reactive forms
+    // Section 31: [Froms] Reactive forms
     ReactiveFormsModule,
-    // Custom module for routing
+    // Section 27: [Routing] Custom module for routing
     AppRoutingModule,
-    // Unlocks angular http features on the project
+    // Section 36: [Http Response] Unlocks angular http features on the project
     HttpClientModule,
   ],
   // lists the component which can me mentioned in then index.html file and Angular Analyzes these at the starting of our project.
