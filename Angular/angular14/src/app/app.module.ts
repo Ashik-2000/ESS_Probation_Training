@@ -39,7 +39,7 @@ import { ServersComponent } from './routing/servers/servers.component';
 import { ServersService } from './routing/servers/servers.service';
 import { UserComponent } from './routing/users/user/user.component';
 import { UsersComponent } from './routing/users/users.component';
-import { ServerComponent18 } from './server18/server18.component';
+import { ServerComponent18 } from './servers18/server18/server18.component';
 import { ServersComponent18 } from './servers18/servers18.component';
 import { AccountComponent } from './services-depedency-injection/account/account.component';
 import { NewAccountComponent } from './services-depedency-injection/new-account/new-account.component';
