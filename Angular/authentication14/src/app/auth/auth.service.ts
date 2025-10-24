@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, Subject, tap, throwError } from 'rxjs';
+import { User } from './auth.model';
 
 export interface AuthResponseData {
   idToken: string;
@@ -15,6 +16,8 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
+  user = new Subject<User>();
+
   constructor(private http: HttpClient) {}
 
   signUp(email: string, password: string) {
@@ -27,7 +30,10 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError((errorResponse) => this.handleError(errorResponse)));
+      .pipe(
+        catchError((errorResponse) => this.handleError(errorResponse)),
+        tap((responseData) => this.handleAuthentication(responseData))
+      );
   }
 
   logIn(email: string, password: string) {
@@ -40,12 +46,28 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError((errorResponse) => this.handleError(errorResponse)));
+      .pipe(
+        catchError((errorResponse) => this.handleError(errorResponse)),
+        tap((responseData) => this.handleAuthentication(responseData))
+      );
+  }
+
+  private handleAuthentication(responseData: AuthResponseData) {
+    const expirationDate = new Date(
+      new Date().getTime() + Number(responseData.expiresIn) * 1000
+    );
+    const user = new User(
+      responseData.email,
+      responseData.localId,
+      responseData.idToken,
+      expirationDate
+    );
+    this.user.next(user);
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
-    console.log(errorResponse);
-    let errorMessage = 'An unknow Error occured';
+    console.log(errorResponse); 
+    let errorMessage = 'An unknown Error occured';
     if (!errorResponse.error || !errorResponse.error.error) {
       return throwError(() => new Error(errorMessage));
     }
