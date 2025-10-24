@@ -9,6 +9,7 @@ ngOnDestroy(){} --> Gets called after anything gets, destroyed or removed from t
 
 
 Observale Operators:
+.pipe() -> Method is to use operator.
 
 of
 from
@@ -16,8 +17,9 @@ map() -> Receives individual item of a iterable
 flatMap
 switchMap
 mergeMap
-filter
+exhaustMap
 takeUntil
+filter
 debounceTime
 distinct
 combineLatest
@@ -27,4 +29,4 @@ delay
 finalize
 retry
 catchError() -> Receives error
-pipe
+
