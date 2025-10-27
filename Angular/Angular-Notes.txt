@@ -30,3 +30,105 @@ finalize
 retry
 catchError() -> Receives error
 
+
+
+
+Folder Structure:
+src/
+├── app/
+│   ├── components/
+│   │   ├── header/
+│   │   │   ├── header.component.ts
+│   │   │   ├── header.component.html
+│   │   │   └── header.component.css
+│   │   ├── orders-list/
+│   │   │   ├── orders-list.component.ts
+│   │   │   ├── orders-list.component.html
+│   │   │   └── orders-list.component.css
+│   │   ├── order-form/
+│   │   │   ├── order-form.component.ts
+│   │   │   ├── order-form.component.html
+│   │   │   └── order-form.component.css
+│   │   └── not-found/
+│   │       ├── not-found.component.ts
+│   │       ├── not-found.component.html
+│   │       └── not-found.component.css
+│   ├── app-routing.module.ts
+│   ├── app.component.ts
+│   ├── app.component.html
+│   ├── app.component.css
+│   └── app.module.ts
+├── index.html
+└── main.ts
+
+
+
+requirements:
+Objective:
+Build a Sales Order Management module using Angular 14. The goal is to demonstrate
+your understanding of Angular fundamentals, Reactive Forms, and data handling.
+	-> View a paginated, searchable, and sortable list of sales orders.
+	-> Create and update sales orders with VAT, discount, and calculated totals.
+	-> Manage customers (existing, new, or guest).
+	
+Functional Requirements
+1. Sales Order List Page
+	-> Display sales orders with Order No, Customer, Date, Total, and Status.
+	-> Support search, filter, sorting, and pagination.
+	-> Each action should update URL query parameters and call API with a paginated
+		DTO:
+		{
+		"page": 1,
+		"pageSize": 10,
+		"sortBy": "orderDate",
+		"sortDir": "desc",
+		"search": "john",
+		"filters": { "status": "Completed" }
+		}
+		
+
+2. Sales Order Form (Create / Edit)
+	-> Use Reactive Forms with proper validation.
+	-> Sections:
+		-> Customer Info: Select existing, add new, or guest customer.
+		-> Order Items: Add multiple products (Product, Qty, Unit Price).
+		-> Auto-calculation:
+			> Line Total = Quantity × Unit Price
+			> VAT (e.g., 15%)
+			> Discount (%)
+			> Grand Total = Σ(Line Totals) + VAT - Discount
+	-> Buttons: Save / Update / Cancel
+	-> Show mock save result as JSON or console log.
+	
+
+API / Data Simulation
+
+Use mock API endpoints (e.g., json-server ):
+	GET /api/orders
+	POST /api/orders
+	PUT /api/orders/:id
+	GET /api/customers
+	POST /api/customers
+	GET /api/products
+
+Example Order Object:
+	{
+	"id": 101,
+	"orderNo": "SO-2025-001",
+	"customer": { "id": 1, "name": "John Doe" },
+	"items": [
+	{ "product": "Laptop", "qty": 2, "price": 800, "vat": 15, "discount": 5 }
+	],
+	"total": 1520,
+	"status": "Completed"
+	}
+	
+Additional Requirements
+	Use Angular Routing for navigation:
+		/orders → Sales Orders List
+		/orders/new → Create Order
+		/orders/:id/edit → Edit Order
+	Show validation errors and prevent submission of invalid forms.
+	Handle 404 (invalid route) gracefully.
+	Clean UI and responsive layout.
+

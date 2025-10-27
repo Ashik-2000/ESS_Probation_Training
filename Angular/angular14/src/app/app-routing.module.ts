@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './routing/auth-guard.service';
 import { HomeComponent } from './routing/home/home.component';
 import { PageNotFoungComponent } from './routing/page-not-foung/page-not-foung.component';
-import { CanDeactivateGuard } from './routing/servers/edit-server/can-deactivate-guard';
 import { EditServerComponent } from './routing/servers/edit-server/edit-server.component';
 import { ServerComponent } from './routing/servers/server/server.component';
 import { ServersComponent } from './routing/servers/servers.component';
@@ -21,12 +19,12 @@ const appRoutes: Routes = [
     path: 'servers',
     component: ServersComponent,
     // canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     children: [
       { path: ':id', component: ServerComponent },
       {
         path: ':id/edit',
-        canDeactivate: [CanDeactivateGuard],
+        // canDeactivate: [CanDeactivateGuard],
         component: EditServerComponent,
       },
     ],

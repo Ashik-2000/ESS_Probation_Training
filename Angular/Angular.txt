@@ -81,7 +81,7 @@ For example,
 	This happens because our Angular project uses typescript 4.7. but the @types/node@16.18.163 files are too new to compile using the TS-4.7 compiler. We need @type/node@16.11.x
 	for this to work. So, we can do;
 	-> npm uninstall @types/node
-	-> npm install --save-dev @type/node@16.11.68
+	-> npm install --save-dev @types/node@16.11.68
 	
 	This now, we have to delete and reinstall the dependencies to be safe.
 	-> npx rimraf node_modules
