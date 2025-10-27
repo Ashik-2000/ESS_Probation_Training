@@ -1,5 +1,5 @@
 export class AuthService {
-  loggedIn = false;
+  loggedIn = true;
 
   isAuthenticated(): Promise<boolean> {
     const promise = new Promise<boolean>((resolve, reject) => {
@@ -14,6 +14,6 @@ export class AuthService {
     this.loggedIn = true;
   }
   logout() {
-    this.loggedIn = false;
+    this.loggedIn = true;
   }
 }
