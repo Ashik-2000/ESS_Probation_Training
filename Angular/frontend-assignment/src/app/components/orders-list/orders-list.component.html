@@ -18,7 +18,7 @@
     <tbody>
       <tr *ngFor="let order of orders">
         <td>{{ order.orderNo }}</td>
-        <td>{{ order.customer }}</td>
+        <td>{{ order.customer.name }}</td>
         <td>{{ order.date }}</td>
         <td>{{ order.total | currency }}</td>
         <td>

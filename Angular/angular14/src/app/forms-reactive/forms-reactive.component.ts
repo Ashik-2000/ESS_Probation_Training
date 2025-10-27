@@ -57,7 +57,7 @@ export class FormsReactiveComponent implements OnInit {
     });
   }
 
-  // Adding to FormConrol on FormArray
+  // Adding FormConrol on FormArray
   onAddHobby() {
     const control = new FormControl(null, Validators.required);
     (<FormArray>this.signupForm.get('hobbies'))?.push(control);
