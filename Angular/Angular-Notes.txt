@@ -35,31 +35,42 @@ catchError() -> Receives error
 
 Folder Structure:
 src/
-├── app/
-│   ├── components/
-│   │   ├── header/
-│   │   │   ├── header.component.ts
-│   │   │   ├── header.component.html
-│   │   │   └── header.component.css
-│   │   ├── orders-list/
-│   │   │   ├── orders-list.component.ts
-│   │   │   ├── orders-list.component.html
-│   │   │   └── orders-list.component.css
-│   │   ├── order-form/
-│   │   │   ├── order-form.component.ts
-│   │   │   ├── order-form.component.html
-│   │   │   └── order-form.component.css
-│   │   └── not-found/
-│   │       ├── not-found.component.ts
-│   │       ├── not-found.component.html
-│   │       └── not-found.component.css
-│   ├── app-routing.module.ts
-│   ├── app.component.ts
-│   ├── app.component.html
-│   ├── app.component.css
-│   └── app.module.ts
-├── index.html
-└── main.ts
+└── app/
+    ├── components/
+    │   ├── header/
+    │   │   ├── header.component.ts
+    │   │   ├── header.component.html
+    │   │   └── header.component.css
+    │   ├── orders-list/
+    │   │   ├── orders-list.component.ts
+    │   │   ├── orders-list.component.html
+    │   │   └── orders-list.component.css
+    │   ├── order-form/
+    │   │   ├── order-form.component.ts
+    │   │   ├── order-form.component.html
+    │   │   └── order-form.component.css
+    │   └── not-found/
+    │       ├── not-found.component.ts
+    │       ├── not-found.component.html
+    │       └── not-found.component.css
+	│
+	├── data/
+    │   └── db.json
+	│
+	├── interfaces/
+	│	└── interfaces.ts
+	│
+	├── services/
+    │   ├── customer.service.ts
+    │   ├── order.service.ts
+	│	└── product.service.ts
+	│
+    ├── app-routing.module.ts
+    ├── app.component.ts
+    ├── app.component.html
+    ├── app.component.css
+    └── app.module.ts
+
 
 
 

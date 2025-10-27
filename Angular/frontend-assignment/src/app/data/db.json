@@ -1,0 +1,82 @@
+{
+  "orders": [
+    {
+      "id": "1",
+      "orderNo": "SO-2025-001",
+      "customer": {
+        "id": 1,
+        "name": "John Doe"
+      },
+      "items": [
+        {
+          "product": "Laptop",
+          "qty": 2,
+          "price": 800,
+          "vat": 15,
+          "discount": 5
+        }
+      ],
+      "total": 1520,
+      "status": "Completed",
+      "date": "2025-10-26"
+    },
+    {
+      "id": "2",
+      "orderNo": "SO-2025-2",
+      "customer": {
+        "id": "2",
+        "name": "Jane Smith"
+      },
+      "items": [
+        {
+          "product": "Mouse",
+          "qty": 3,
+          "price": 25,
+          "vat": 15,
+          "discount": 0
+        },
+        {
+          "product": "Keyboard",
+          "qty": 1,
+          "price": 40,
+          "vat": 15,
+          "discount": 0
+        }
+      ],
+      "total": 132.25,
+      "status": "Pending",
+      "date": "2025-10-25"
+    }
+  ],
+  "customers": [
+    {
+      "id": "1",
+      "name": "John Doe"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith"
+    },
+    {
+      "id": "3",
+      "name": "Michael Brown"
+    }
+  ],
+  "products": [
+    {
+      "id": "101",
+      "name": "Laptop",
+      "price": 800
+    },
+    {
+      "id": "102",
+      "name": "Mouse",
+      "price": 25
+    },
+    {
+      "id": "103",
+      "name": "Keyboard",
+      "price": 40
+    }
+  ]
+}

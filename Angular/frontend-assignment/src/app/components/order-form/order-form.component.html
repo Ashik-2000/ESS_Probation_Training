@@ -1,0 +1,172 @@
+<div class="container mt-4">
+  <h4 *ngIf="!isEditMode">Create New Order</h4>
+  <h4 *ngIf="isEditMode">Edit Order #{{ orderId }}</h4>
+  <hr />
+
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <!-- Customer Info -->
+    <div class="card mb-4">
+      <div class="card-header fw-bold">Customer Information</div>
+      <!-- customer formGroup -->
+      <div class="card-body row g-3" formGroupName="customer">
+        <div class="col-md-6">
+          <label class="form-label">Customer</label>
+          <select class="form-select" formControlName="id">
+            <option value="">Select Customer</option>
+            <option *ngFor="let cust of customers" [value]="cust.id">
+              {{ cust.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Customer Name</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            placeholder="Enter customer name"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Items -->
+    <div class="card mb-4">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <span class="fw-bold">Order Items</span>
+        <button
+          type="button"
+          class="btn btn-sm btn-primary"
+          (click)="addItem()"
+        >
+          + Add Item
+        </button>
+      </div>
+
+      <div class="card-body table-responsive">
+        <table class="table table-bordered align-middle text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Line Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="items">
+            <tr
+              *ngFor="let item of items.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <td>
+                <select
+                  class="form-select"
+                  formControlName="product"
+                  (change)="onProductChange(i)"
+                >
+                  <option value="">Select Product</option>
+                  <option *ngFor="let p of products" [value]="p.name">
+                    {{ p.name }}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <input
+                  type="number"
+                  min="1"
+                  class="form-control"
+                  formControlName="qty"
+                  (input)="updateLineTotal(i)"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="price"
+                  (input)="updateLineTotal(i)"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="lineTotal"
+                />
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  (click)="removeItem(i)"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="card mb-3">
+      <div class="card-header fw-bold">Summary</div>
+      <div class="card-body row g-3">
+        <div class="col-md-4">
+          <label class="form-label">VAT (%)</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="vat"
+            (input)="calculateGrandTotal()"
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Discount (%)</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="discount"
+            (input)="calculateGrandTotal()"
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Grand Total</label>
+          <input type="number" class="form-control" formControlName="total" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Status and Date -->
+    <div class="row g-3 mb-3">
+      <div class="col-md-6">
+        <label class="form-label">Status</label>
+        <select class="form-select" formControlName="status">
+          <option>Pending</option>
+          <option>Completed</option>
+          <option>Cancelled</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-control" formControlName="date" />
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-success me-2"
+      [disabled]="orderForm.invalid"
+    >
+      {{ isEditMode ? "Update Order" : "Save Order" }}
+    </button>
+    <button type="button" class="btn btn-secondary" routerLink="/orders">
+      Cancel
+    </button>
+  </form>
+</div>
