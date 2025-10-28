@@ -11,7 +11,11 @@
       <div class="card-body row g-3" formGroupName="customer">
         <div class="col-md-6">
           <label class="form-label">Customer</label>
-          <select class="form-select" formControlName="id">
+          <select
+            class="form-select"
+            formControlName="id"
+            (change)="onCustomerChange($event)"
+          >
             <option value="">Select Customer</option>
             <option *ngFor="let cust of customers" [value]="cust.id">
               {{ cust.name }}
@@ -26,6 +30,7 @@
             class="form-control"
             formControlName="name"
             placeholder="Enter customer name"
+            readonly
           />
         </div>
       </div>

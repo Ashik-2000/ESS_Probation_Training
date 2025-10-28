@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Customer, Order, Product } from 'src/app/interfaces/interfaces';
+import {
+  Customer,
+  Order,
+  OrderItem,
+  Product,
+} from 'src/app/interfaces/interfaces';
 import { CustomerService } from 'src/app/services/customer.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -16,7 +21,7 @@ export class OrderFormComponent implements OnInit {
   customers: Customer[] = [];
   products: Product[] = [];
   isEditMode = false;
-  orderId!: number;
+  orderId!: string;
 
   constructor(
     private orderService: OrderService,
@@ -30,6 +35,14 @@ export class OrderFormComponent implements OnInit {
     this.initializeForm();
     this.loadDropdownData();
     this.checkEditMode();
+  }
+
+  // Load dropdown data for customers and products
+  loadDropdownData(): void {
+    this.customerService
+      .getCustomers()
+      .subscribe((res) => (this.customers = res));
+    this.productService.getProducts().subscribe((res) => (this.products = res));
   }
 
   initializeForm(): void {
@@ -50,6 +63,27 @@ export class OrderFormComponent implements OnInit {
     });
   }
 
+  // auto filling the customer name field
+  onCustomerChange(event: Event): void {
+    const selectedId = (event.target as HTMLSelectElement).value;
+    const selectedCustomer = this.customers.find((c) => c.id === +selectedId);
+
+    if (selectedCustomer) {
+      this.orderForm.get('customer.name')?.setValue(selectedCustomer.name);
+    } else {
+      this.orderForm.get('customer.name')?.reset();
+    }
+  }
+
+  // Add & remove item rows
+  addItem(): void {
+    this.items.push(this.createItem());
+  }
+  removeItem(index: number): void {
+    this.items.removeAt(index);
+  }
+
+  // item creating fucntion for product formArray
   createItem(): FormGroup {
     return new FormGroup({
       product: new FormControl('', Validators.required),
@@ -62,22 +96,6 @@ export class OrderFormComponent implements OnInit {
   // Getter for FormArray
   get items(): FormArray {
     return this.orderForm.get('items') as FormArray;
-  }
-
-  // Add & remove item rows
-  addItem(): void {
-    this.items.push(this.createItem());
-  }
-  removeItem(index: number): void {
-    this.items.removeAt(index);
-  }
-
-  // Load dropdown data for customers and products
-  loadDropdownData(): void {
-    this.customerService
-      .getCustomers()
-      .subscribe((res) => (this.customers = res));
-    this.productService.getProducts().subscribe((res) => (this.products = res));
   }
 
   // Auto fill price when Product changes and Calculate LineTotal & GrandTotal.
@@ -121,33 +139,23 @@ export class OrderFormComponent implements OnInit {
     this.orderForm.get('total')?.setValue(grandTotal, { emitEvent: false });
   }
 
-  // Check if in edit mode (via route param)
-  // checkEditMode(): void {
-  //   const idParam = this.route.snapshot.paramMap.get('id');
-  //   if (idParam) {
-  //     this.isEditMode = true;
-  //     this.orderId = Number(idParam);
-  //     this.orderService.getOrderById(this.orderId).subscribe((order) => {
-  //       this.orderForm.patchValue(order);
-  //     });
-  //   }
-  // }
+  // ********** EditMode **********
 
   checkEditMode(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (!idParam) return;
 
     this.isEditMode = true;
-    this.orderId = Number(idParam);
+    this.orderId = idParam;
 
     this.orderService.getOrderById(this.orderId).subscribe((order) => {
       // Patch customer, vat, discount, status, date
       this.orderForm.patchValue({
         customer: {
-          id: order.customer.id.toString(),
+          id: order.customer.id,
           name: order.customer.name,
         },
-        vat: order.items[0]?.vat || 15, // if you store vat per item
+        vat: order.items[0]?.vat || 15,
         discount: order.items[0]?.discount || 0,
         status: order.status,
         date: order.date,
@@ -157,7 +165,7 @@ export class OrderFormComponent implements OnInit {
       // Clear existing items
       this.items.clear();
 
-      // Populate items
+      // Populate with newly created values
       order.items.forEach((item) => {
         const itemGroup = this.createItem();
         itemGroup.patchValue({
@@ -173,6 +181,8 @@ export class OrderFormComponent implements OnInit {
       this.calculateGrandTotal();
     });
   }
+
+  // ********** Submit Function **********
 
   onSubmit(): void {
     if (this.orderForm.invalid) {
@@ -192,7 +202,7 @@ export class OrderFormComponent implements OnInit {
         id: orderData.customer.id,
         name: orderData.customer.name,
       },
-      items: orderData.items.map((item: any) => ({
+      items: orderData.items.map((item: OrderItem) => ({
         product: item.product,
         qty: item.qty,
         price: item.price,
@@ -214,12 +224,11 @@ export class OrderFormComponent implements OnInit {
   private createOrder(order: any): void {
     this.orderService.createOrder(order).subscribe({
       next: () => {
-        alert('✅ Order created successfully!');
         this.router.navigate(['/orders']);
       },
       error: (err) => {
         console.error('Create order failed', err);
-        alert('❌ Failed to create order.');
+        alert('Failed to create order.');
       },
     });
   }
@@ -228,12 +237,11 @@ export class OrderFormComponent implements OnInit {
   private updateOrder(order: any): void {
     this.orderService.updateOrder(this.orderId, order).subscribe({
       next: () => {
-        alert('✅ Order updated successfully!');
         this.router.navigate(['/orders']);
       },
       error: (err) => {
         console.error('Update order failed', err);
-        alert('❌ Failed to update order.');
+        alert('Failed to update order.');
       },
     });
   }
