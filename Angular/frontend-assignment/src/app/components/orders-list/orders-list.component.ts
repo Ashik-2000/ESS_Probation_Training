@@ -9,7 +9,7 @@ import { OrderService } from '../../services/order.service';
   styleUrls: ['./orders-list.component.css'],
 })
 export class OrdersListComponent implements OnInit {
-  allOrders: Order[] = []; // All data fetched from backend
+  // allOrders: Order[] = []; // All data fetched from backend
   orders: Order[] = []; // Displayed data after pagination
   searchTerm = '';
   selectedStatus = '';
@@ -45,24 +45,24 @@ export class OrdersListComponent implements OnInit {
       next: (data) => {
         let filteredData = [...data];
 
-        // --- 1️⃣ Search filter ---
+        // --- 1Search filter ---
         if (this.searchTerm.trim()) {
           filteredData = filteredData.filter((o) =>
             o.orderNo.toLowerCase().includes(this.searchTerm.toLowerCase())
           );
         }
 
-        // --- 2️⃣ Status filter ---
+        // --- Status filter ---
         if (this.selectedStatus) {
           filteredData = filteredData.filter(
             (o) => o.status === this.selectedStatus
           );
         }
 
-        // --- 3️⃣ Sort manually ---
+        // --- Sort manually ---
         filteredData = this.sortOrders(filteredData, this.sortBy, this.sortDir);
 
-        // --- 4️⃣ Pagination manually ---
+        // --- Pagination manually ---
         this.totalRecords = filteredData.length;
         const start = (this.page - 1) * this.pageSize;
         const end = start + this.pageSize;
