@@ -45,7 +45,7 @@ export class OrdersListComponent implements OnInit {
       next: (data) => {
         let filteredData = [...data];
 
-        // --- 1Search filter ---
+        // --- Search filter ---
         if (this.searchTerm.trim()) {
           filteredData = filteredData.filter((o) =>
             o.orderNo.toLowerCase().includes(this.searchTerm.toLowerCase())
@@ -59,13 +59,13 @@ export class OrdersListComponent implements OnInit {
           );
         }
 
-        // --- Sort manually ---
+        // --- Sort ---
         filteredData = this.sortOrders(filteredData, this.sortBy, this.sortDir);
-
-        // --- Pagination manually ---
         this.totalRecords = filteredData.length;
-        const start = (this.page - 1) * this.pageSize;
-        const end = start + this.pageSize;
+
+        // --- Pagination ---
+        const end = this.page * this.pageSize;
+        const start = end - this.pageSize;
         this.orders = filteredData.slice(start, end);
       },
       error: (err) => console.error('Failed to fetch orders', err),
@@ -74,6 +74,7 @@ export class OrdersListComponent implements OnInit {
 
   /** Sorting logic */
   sortOrders(data: Order[], sortBy: string, sortDir: 'asc' | 'desc') {
+    // couldn't assigend type in the arguments
     return data.sort((a: any, b: any) => {
       let valA = a[sortBy];
       let valB = b[sortBy];
@@ -87,7 +88,7 @@ export class OrdersListComponent implements OnInit {
     });
   }
 
-  /** --- Action Handlers --- */
+  /** --- Action methods --- */
 
   onSearchChange() {
     this.page = 1;
@@ -109,7 +110,7 @@ export class OrdersListComponent implements OnInit {
     this.updateQueryParams();
   }
 
-  /** --- Pagination handlers --- */
+  /** --- Pagination methods --- */
   nextPage() {
     if (this.page * this.pageSize < this.totalRecords) {
       this.page++;
