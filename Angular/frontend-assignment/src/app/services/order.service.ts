@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Order, OrderList } from '../interfaces/interfaces';
+import { Order } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -15,19 +15,19 @@ export class OrderService {
     return this.http.get<Order[]>(this.apiUrl);
   }
 
-  getOrderById(id: number): Observable<Order> {
+  getOrderById(id: string): Observable<Order> {
     return this.http.get<Order>(`${this.apiUrl}/${id}`);
   }
 
-  createOrder(order: OrderList): Observable<OrderList> {
-    return this.http.post<OrderList>(this.apiUrl, order);
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.apiUrl, order);
   }
 
-  updateOrder(id: number, order: OrderList): Observable<OrderList> {
-    return this.http.put<OrderList>(`${this.apiUrl}/${id}`, order);
+  updateOrder(id: string, order: Order): Observable<Order> {
+    return this.http.put<Order>(`${this.apiUrl}/${id}`, order);
   }
 
-  deleteOrder(id: number): Observable<void> {
+  deleteOrder(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

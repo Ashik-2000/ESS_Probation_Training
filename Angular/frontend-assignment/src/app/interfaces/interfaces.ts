@@ -1,19 +1,15 @@
-// For table view
-export interface OrderList {
-  id?: number;
-  orderNo: string;
-  customer: string;
-  date: string;
-  total: number;
-  status: string;
-}
-
-// For order form
 export interface Customer {
   id: number;
   name: string;
 }
 
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
+
+// For form array of products
 export interface OrderItem {
   product: string;
   qty: number;
@@ -22,8 +18,9 @@ export interface OrderItem {
   discount?: number;
 }
 
+// For entire form
 export interface Order {
-  id?: number;
+  id?: string;
   orderNo: string;
   customer: Customer;
   items: OrderItem[];
@@ -32,8 +29,14 @@ export interface Order {
   date: string;
 }
 
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
+// For URL query parameters
+export interface OrderQueryParams {
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortDir?: 'asc' | 'desc';
+  search?: string;
+  filters?: {
+    status?: string;
+  };
 }
