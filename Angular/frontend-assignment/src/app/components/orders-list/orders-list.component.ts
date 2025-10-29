@@ -47,7 +47,7 @@ export class OrdersListComponent implements OnInit {
         // --- Search filter ---
         if (this.searchTerm.trim()) {
           filteredData = filteredData.filter((order) =>
-            order.orderNo.toLowerCase().includes(this.searchTerm.toLowerCase())
+            order.customer.name.toLowerCase().includes(this.searchTerm.toLowerCase())
           );
         }
 
