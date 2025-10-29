@@ -10,9 +10,7 @@
       <!-- customer formGroup -->
       <div class="card-body row g-3" formGroupName="customer">
         <div class="col-md-6">
-          <label class="form-label"
-            >Customer<span class="text-danger fw-bold">*</span></label
-          >
+          <label class="form-label">Customer</label>
           <select class="form-select" formControlName="id">
             <option value="">Select Customer</option>
             <option *ngFor="let cust of customers" [value]="cust.id">
