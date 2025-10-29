@@ -47,7 +47,9 @@ export class OrdersListComponent implements OnInit {
         // --- Search filter ---
         if (this.searchTerm.trim()) {
           filteredData = filteredData.filter((order) =>
-            order.customer.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+            order.customer.name
+              .toLowerCase()
+              .includes(this.searchTerm.toLowerCase())
           );
         }
 
@@ -146,8 +148,6 @@ export class OrdersListComponent implements OnInit {
       search: this.searchTerm,
       status: this.selectedStatus,
     };
-
-    // if (this.searchTerm) queryParams['search'] = this.searchTerm;
 
     this.router.navigate([], {
       relativeTo: this.route,
