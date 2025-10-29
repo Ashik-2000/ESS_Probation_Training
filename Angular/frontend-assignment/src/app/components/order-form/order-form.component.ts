@@ -81,6 +81,8 @@ export class OrderFormComponent implements OnInit {
   }
   removeItem(index: number): void {
     this.items.removeAt(index);
+    // Recalculate grandTotal after removing one product
+    this.calculateGrandTotal();
   }
 
   // item creating fucntion for product formArray

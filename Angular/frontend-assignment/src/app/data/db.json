@@ -282,9 +282,9 @@
     },
     {
       "id": "fe94",
-      "orderNo": "SO-2025-514",
+      "orderNo": "SO-2025-fe94",
       "customer": {
-        "id": "7",
+        "id": "10",
         "name": "Atiqul Islam"
       },
       "items": [
@@ -294,16 +294,9 @@
           "price": 800,
           "vat": 15,
           "discount": 0
-        },
-        {
-          "product": "Keyboard",
-          "qty": 1,
-          "price": 40,
-          "vat": 15,
-          "discount": 0
         }
       ],
-      "total": 966,
+      "total": 920,
       "status": "Pending",
       "date": "2025-10-28"
     }
@@ -335,6 +328,18 @@
     },
     {
       "id": "7",
+      "name": "Atiqul Islam"
+    },
+    {
+      "id": "8",
+      "name": "Atiqul Islam"
+    },
+    {
+      "id": "9",
+      "name": "Atiqul Islam"
+    },
+    {
+      "id": "10",
       "name": "Atiqul Islam"
     }
   ],
