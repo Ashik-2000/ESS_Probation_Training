@@ -44,7 +44,7 @@
       "id": "3",
       "orderNo": "SO-2025-3",
       "customer": {
-        "id": 3,
+        "id": "9",
         "name": "Michael Brown"
       },
       "items": [
@@ -56,8 +56,8 @@
           "discount": 8
         }
       ],
-      "total": 165.6,
-      "status": "Pending",
+      "total": 171.2,
+      "status": "Completed",
       "date": "2025-10-24"
     },
     {
@@ -261,44 +261,38 @@
       "date": "2025-10-14"
     },
     {
-      "id": "bee5",
-      "orderNo": "SO-2025-bee5",
+      "id": "5832",
+      "orderNo": "SO-2025-5832",
       "customer": {
-        "id": "6",
+        "id": "4",
         "name": "Ashikul Islam"
       },
       "items": [
         {
-          "product": "Laptop",
+          "product": "Mouse",
           "qty": 1,
-          "price": 800,
+          "price": 25,
           "vat": 15,
           "discount": 0
-        }
-      ],
-      "total": 920,
-      "status": "Completed",
-      "date": "2025-10-29"
-    },
-    {
-      "id": "fe94",
-      "orderNo": "SO-2025-fe94",
-      "customer": {
-        "id": "10",
-        "name": "Atiqul Islam"
-      },
-      "items": [
+        },
         {
           "product": "Laptop",
           "qty": 1,
           "price": 800,
           "vat": 15,
           "discount": 0
+        },
+        {
+          "product": "Keyboard",
+          "qty": 2,
+          "price": 40,
+          "vat": 15,
+          "discount": 0
         }
       ],
-      "total": 920,
-      "status": "Pending",
-      "date": "2025-10-28"
+      "total": 1040.75,
+      "status": "Completed",
+      "date": "2025-10-29"
     }
   ],
   "customers": [
@@ -316,31 +310,7 @@
     },
     {
       "id": "4",
-      "name": "John Doe"
-    },
-    {
-      "id": "5",
       "name": "Ashikul Islam"
-    },
-    {
-      "id": "6",
-      "name": "Ashikul Islam"
-    },
-    {
-      "id": "7",
-      "name": "Atiqul Islam"
-    },
-    {
-      "id": "8",
-      "name": "Atiqul Islam"
-    },
-    {
-      "id": "9",
-      "name": "Atiqul Islam"
-    },
-    {
-      "id": "10",
-      "name": "Atiqul Islam"
     }
   ],
   "products": [

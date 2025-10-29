@@ -35,6 +35,7 @@ export class OrderFormComponent implements OnInit {
     this.initializeForm();
     this.loadDropdownData();
     this.checkEditMode();
+    this.setupReactiveListener();
   }
 
   // Load dropdown data for customers and products
@@ -52,8 +53,8 @@ export class OrderFormComponent implements OnInit {
         name: new FormControl('', Validators.required),
       }),
       items: new FormArray([this.createItem()]),
-      vat: new FormControl(15),
-      discount: new FormControl(0),
+      vat: new FormControl(15, Validators.min(0)),
+      discount: new FormControl(0, Validators.min(0)),
       total: new FormControl({ value: 0, disabled: true }),
       status: new FormControl('Pending', Validators.required),
       date: new FormControl(
@@ -63,21 +64,12 @@ export class OrderFormComponent implements OnInit {
     });
   }
 
-  // auto filling the customer name field
-  onCustomerChange(event: Event): void {
-    const selectedId = (event.target as HTMLSelectElement).value;
-    const selectedCustomer = this.customers.find((c) => +c.id === +selectedId);
-
-    if (selectedCustomer) {
-      this.orderForm.get('customer.name')?.setValue(selectedCustomer.name);
-    } else {
-      this.orderForm.get('customer.name')?.reset();
-    }
-  }
-
   // Add & remove item rows
   addItem(): void {
-    this.items.push(this.createItem());
+    const newItem = this.createItem();
+    this.items.push(newItem);
+    // To get all the product group subcribed for value changes.
+    this.setupItemListener(newItem, this.items.length - 1);
   }
   removeItem(index: number): void {
     this.items.removeAt(index);
@@ -90,7 +82,7 @@ export class OrderFormComponent implements OnInit {
     return new FormGroup({
       product: new FormControl('', Validators.required),
       qty: new FormControl(1, [Validators.required, Validators.min(1)]),
-      price: new FormControl(0),
+      price: new FormControl(),
       lineTotal: new FormControl({ value: 0, disabled: true }),
     });
   }
@@ -100,15 +92,56 @@ export class OrderFormComponent implements OnInit {
     return this.orderForm.get('items') as FormArray;
   }
 
-  // Auto fill price when Product changes and Calculate LineTotal & GrandTotal.
-  onProductChange(index: number): void {
-    const itemGroup = this.items.at(index) as FormGroup;
-    const productName = itemGroup.get('product')?.value;
-    const product = this.products.find((p) => p.name === productName);
-    if (product) {
-      itemGroup.get('price')?.setValue(product.price);
+  // To subcribe for the customer name and first product group.
+  setupReactiveListener(): void {
+    // Auto filling customer by listening to the value changes of the customer ID.
+    this.orderForm.get('customer.id')?.valueChanges.subscribe((selectedID) => {
+      const selectedCustomer = this.customers.find(
+        (customer) => +customer.id === +selectedID
+      );
+      if (selectedCustomer) {
+        this.orderForm.get('customer.name')?.setValue(selectedCustomer.name);
+      } else {
+        this.orderForm.get('customer.name')?.reset();
+      }
+    });
+
+    // To auto filling unit price and calculate line total only for the first one.
+    this.items.controls.forEach((itemGroup, index) => {
+      this.setupItemListener(itemGroup as FormGroup, index);
+    });
+
+    // To listen vat changes and update GrandTotal
+    this.orderForm.get('vat')?.valueChanges.subscribe(() => {
+      this.calculateGrandTotal();
+    });
+
+    // // To listen discount changes and update GrandTotal
+    this.orderForm.get('discount')?.valueChanges.subscribe(() => {
+      this.calculateGrandTotal();
+    });
+  }
+
+  // Subscribe to the product name for unit price and line total and qty for the line total.
+  setupItemListener(itemGroup: FormGroup, index: number): void {
+    itemGroup.get('product')?.valueChanges.subscribe((selectedProductName) => {
+      const selectedProduct = this.products.find(
+        (product) => product.name === selectedProductName
+      );
+      if (selectedProduct) {
+        itemGroup.get('price')?.setValue(selectedProduct.price);
+        this.updateLineTotal(index);
+      } else {
+        itemGroup.get('price')?.reset();
+        this.orderForm.get('vat')?.reset(15);
+        this.orderForm.get('discount')?.reset(0);
+        this.updateLineTotal(index);
+      }
+    });
+
+    itemGroup.get('qty')?.valueChanges.subscribe(() => {
       this.updateLineTotal(index);
-    }
+    });
   }
 
   // Update line total when qty changes and fire GrandTotal.
@@ -124,12 +157,10 @@ export class OrderFormComponent implements OnInit {
 
   // Calculate grand total
   calculateGrandTotal(): void {
-    let subtotal = 0;
-
-    this.items.controls.forEach((control) => {
-      const lineTotalValue = control.get('lineTotal')?.value || 0;
-      subtotal += lineTotalValue;
-    });
+    const subtotal = this.items.controls.reduce((prevTotal, control) => {
+      const lineTotal = control.get('lineTotal')?.value || 0;
+      return prevTotal + lineTotal;
+    }, 0);
 
     const vatPercent = this.orderForm.get('vat')?.value || 0;
     const discountPercent = this.orderForm.get('discount')?.value || 0;
@@ -193,9 +224,10 @@ export class OrderFormComponent implements OnInit {
 
     const orderData = this.orderForm.getRawValue();
     const customerName: string = orderData.customer.name.trim();
-    const existingCustomer = this.customers.find((customer) => {
-      customer.name.toLocaleLowerCase() === customerName.toLocaleLowerCase();
-    });
+    const existingCustomer = this.customers.find(
+      (customer) =>
+        customer.name.toLocaleLowerCase() === customerName.toLocaleLowerCase()
+    );
 
     if (existingCustomer) {
       // For Existing customer -> move directly
@@ -214,7 +246,7 @@ export class OrderFormComponent implements OnInit {
           this.createOrUpdateOrder(createdCustomer);
         },
         error: (err) => {
-          console.error('Failed to create Customer');
+          console.error('Failed to create Customer', err);
           alert('Failed to craete new customer');
         },
       });

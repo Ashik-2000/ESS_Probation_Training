@@ -10,13 +10,16 @@ import { OrderService } from '../../services/order.service';
 })
 export class OrdersListComponent implements OnInit {
   orders: Order[] = [];
-  searchTerm = '';
-  selectedStatus = '';
-  sortBy = 'date';
-  sortDir: 'asc' | 'desc' = 'desc';
-  page = 1;
-  pageSize = 1;
   totalRecords = 0;
+
+  queryParams: OrderQueryParams = {
+    page: 1,
+    pageSize: 5,
+    sortBy: 'date',
+    sortDir: 'desc',
+    search: '',
+    status: '',
+  };
 
   constructor(
     private orderService: OrderService,
@@ -25,14 +28,16 @@ export class OrdersListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Read URL query params on load
+    // Read query params from URL on component load
     this.route.queryParams.subscribe((params) => {
-      this.page = +params['page'] || 1;
-      this.pageSize = +params['pageSize'] || 5;
-      this.searchTerm = params['search'] || '';
-      this.selectedStatus = params['status'] || '';
-      this.sortBy = params['sortBy'] || 'date';
-      this.sortDir = params['sortDir'] || 'desc';
+      this.queryParams = {
+        page: +params['page'] || 1,
+        pageSize: +params['pageSize'] || 5,
+        sortBy: params['sortBy'] || 'date',
+        sortDir: params['sortDir'] || 'desc',
+        search: params['search'] || '',
+        status: params['status'] || '',
+      };
 
       this.loadOrders();
     });
@@ -45,28 +50,32 @@ export class OrdersListComponent implements OnInit {
         let filteredData = [...data];
 
         // --- Search filter ---
-        if (this.searchTerm.trim()) {
+        if (this.queryParams.search?.trim()) {
           filteredData = filteredData.filter((order) =>
             order.customer.name
               .toLowerCase()
-              .includes(this.searchTerm.toLowerCase())
+              .includes(this.queryParams.search!.toLowerCase())
           );
         }
 
         // --- Status filter ---
-        if (this.selectedStatus) {
+        if (this.queryParams.status) {
           filteredData = filteredData.filter(
-            (order) => order.status === this.selectedStatus
+            (order) => order.status === this.queryParams.status
           );
         }
 
         // --- Sort ---
-        filteredData = this.sortOrders(filteredData, this.sortBy, this.sortDir);
+        filteredData = this.sortOrders(
+          filteredData,
+          this.queryParams.sortBy!,
+          this.queryParams.sortDir!
+        );
         this.totalRecords = filteredData.length;
 
         // --- Pagination ---
-        const end = this.page * this.pageSize;
-        const start = end - this.pageSize;
+        const end = this.queryParams.page! * this.queryParams.pageSize!;
+        const start = end - this.queryParams.pageSize!;
         this.orders = filteredData.slice(start, end);
       },
       error: (err) => console.error('Failed to fetch orders', err),
@@ -75,14 +84,15 @@ export class OrdersListComponent implements OnInit {
 
   /** Sorting logic */
   sortOrders(data: Order[], sortBy: string, sortDir: 'asc' | 'desc') {
-    // couldn't assigend type in the arguments
     return data.sort((a: any, b: any) => {
       let valA = a[sortBy];
       let valB = b[sortBy];
+
       if (sortBy === 'date') {
         valA = new Date(valA);
         valB = new Date(valB);
       }
+
       if (valA < valB) return sortDir === 'asc' ? -1 : 1;
       if (valA > valB) return sortDir === 'asc' ? 1 : -1;
       return 0;
@@ -90,38 +100,41 @@ export class OrdersListComponent implements OnInit {
   }
 
   /** --- Action methods --- */
-
   onSearchChange() {
-    this.page = 1;
+    this.queryParams.page = 1;
     this.updateQueryParams();
   }
 
   onFilterChange() {
-    this.page = 1;
+    this.queryParams.page = 1;
     this.updateQueryParams();
   }
 
   onSort(column: string) {
-    if (this.sortBy === column) {
-      this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
+    if (this.queryParams.sortBy === column) {
+      this.queryParams.sortDir =
+        this.queryParams.sortDir === 'asc' ? 'desc' : 'asc';
     } else {
-      this.sortBy = column;
-      this.sortDir = 'asc';
+      this.queryParams.sortBy = column;
+      this.queryParams.sortDir = 'asc';
     }
     this.updateQueryParams();
   }
 
   /** --- Pagination methods --- */
   nextPage() {
-    if (this.page * this.pageSize < this.totalRecords) {
-      this.page++;
+    const totalPages = Math.ceil(
+      this.totalRecords / (this.queryParams.pageSize || 1)
+    );
+    if (this.queryParams.page! < totalPages) {
+      this.queryParams.page!++;
       this.updateQueryParams();
     }
   }
 
   previousPage() {
-    if (this.page > 1) {
-      this.page--;
+    if (this.queryParams.page! > 1) {
+      this.queryParams.page!--;
       this.updateQueryParams();
     }
   }
@@ -130,9 +143,7 @@ export class OrdersListComponent implements OnInit {
   onDelete(id: string | undefined) {
     if (confirm('Are you sure you want to delete this order?')) {
       this.orderService.deleteOrder(id!).subscribe({
-        next: () => {
-          this.loadOrders();
-        },
+        next: () => this.loadOrders(),
         error: (err) => console.error('Failed to delete order', err),
       });
     }
@@ -140,30 +151,23 @@ export class OrdersListComponent implements OnInit {
 
   /** --- Keep state in URL --- */
   updateQueryParams() {
-    const queryParams: OrderQueryParams = {
-      page: this.page,
-      pageSize: this.pageSize,
-      sortBy: this.sortBy,
-      sortDir: this.sortDir,
-      search: this.searchTerm,
-      status: this.selectedStatus,
-    };
-
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: queryParams,
+      queryParams: this.queryParams,
       queryParamsHandling: 'merge',
     });
   }
 
-  // To remove all the filters
+  /** --- Clear all filters and reset state --- */
   clearFilters() {
-    this.searchTerm = '';
-    this.selectedStatus = '';
-    this.sortBy = 'date';
-    this.sortDir = 'desc';
-    this.page = 1;
-
+    this.queryParams = {
+      page: 1,
+      pageSize: 5,
+      sortBy: 'date',
+      sortDir: 'desc',
+      search: '',
+      status: '',
+    };
     this.router.navigate(['/orders']);
   }
 }
