@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Order } from '../../interfaces/interfaces';
+import { Order, OrderQueryParams } from '../../interfaces/interfaces';
 import { OrderService } from '../../services/order.service';
 
 @Component({
@@ -9,8 +9,7 @@ import { OrderService } from '../../services/order.service';
   styleUrls: ['./orders-list.component.css'],
 })
 export class OrdersListComponent implements OnInit {
-  // allOrders: Order[] = []; // All data fetched from backend
-  orders: Order[] = []; // Displayed data after pagination
+  orders: Order[] = [];
   searchTerm = '';
   selectedStatus = '';
   sortBy = 'date';
@@ -47,15 +46,15 @@ export class OrdersListComponent implements OnInit {
 
         // --- Search filter ---
         if (this.searchTerm.trim()) {
-          filteredData = filteredData.filter((o) =>
-            o.orderNo.toLowerCase().includes(this.searchTerm.toLowerCase())
+          filteredData = filteredData.filter((order) =>
+            order.orderNo.toLowerCase().includes(this.searchTerm.toLowerCase())
           );
         }
 
         // --- Status filter ---
         if (this.selectedStatus) {
           filteredData = filteredData.filter(
-            (o) => o.status === this.selectedStatus
+            (order) => order.status === this.selectedStatus
           );
         }
 
@@ -139,15 +138,16 @@ export class OrdersListComponent implements OnInit {
 
   /** --- Keep state in URL --- */
   updateQueryParams() {
-    const queryParams: any = {
+    const queryParams: OrderQueryParams = {
       page: this.page,
       pageSize: this.pageSize,
       sortBy: this.sortBy,
       sortDir: this.sortDir,
+      search: this.searchTerm,
+      status: this.selectedStatus,
     };
 
-    if (this.searchTerm) queryParams['search'] = this.searchTerm;
-    if (this.selectedStatus) queryParams['status'] = this.selectedStatus;
+    // if (this.searchTerm) queryParams['search'] = this.searchTerm;
 
     this.router.navigate([], {
       relativeTo: this.route,

@@ -48,7 +48,7 @@ export class OrderFormComponent implements OnInit {
   initializeForm(): void {
     this.orderForm = new FormGroup({
       customer: new FormGroup({
-        id: new FormControl(null, Validators.required),
+        id: new FormControl(null),
         name: new FormControl('', Validators.required),
       }),
       items: new FormArray([this.createItem()]),
@@ -66,7 +66,7 @@ export class OrderFormComponent implements OnInit {
   // auto filling the customer name field
   onCustomerChange(event: Event): void {
     const selectedId = (event.target as HTMLSelectElement).value;
-    const selectedCustomer = this.customers.find((c) => c.id === +selectedId);
+    const selectedCustomer = this.customers.find((c) => +c.id === +selectedId);
 
     if (selectedCustomer) {
       this.orderForm.get('customer.name')?.setValue(selectedCustomer.name);
@@ -162,7 +162,7 @@ export class OrderFormComponent implements OnInit {
         total: order.total,
       });
 
-      // Clear existing items
+      // Clear existing items if jump from one customer to another customer edit.
       this.items.clear();
 
       // Populate with newly created values
@@ -186,10 +186,40 @@ export class OrderFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.orderForm.invalid) {
-      // this.orderForm.markAllAsTouched();
       return;
     }
 
+    const orderData = this.orderForm.getRawValue();
+    const customerName: string = orderData.customer.name.trim();
+    const existingCustomer = this.customers.find((customer) => {
+      customer.name.toLocaleLowerCase() === customerName.toLocaleLowerCase();
+    });
+
+    if (existingCustomer) {
+      // For Existing customer -> move directly
+      this.createOrUpdateOrder(existingCustomer);
+    } else {
+      // For new customer -> create customer first then move
+      const newCustomer = {
+        id: (this.customers.length + 1).toString(),
+        name: customerName,
+      };
+
+      this.customerService.createCustomer(newCustomer).subscribe({
+        next: (createdCustomer) => {
+          console.log(createdCustomer);
+          this.customers.push(createdCustomer);
+          this.createOrUpdateOrder(createdCustomer);
+        },
+        error: (err) => {
+          console.error('Failed to create Customer');
+          alert('Failed to craete new customer');
+        },
+      });
+    }
+  }
+
+  createOrUpdateOrder(customer: Customer): void {
     const orderData = this.orderForm.getRawValue();
 
     // Create full Order object
@@ -199,8 +229,8 @@ export class OrderFormComponent implements OnInit {
         ? orderData.orderNo || `SO-${new Date().getFullYear()}-${this.orderId}`
         : `SO-${new Date().getFullYear()}-${Math.floor(Math.random() * 1000)}`,
       customer: {
-        id: orderData.customer.id,
-        name: orderData.customer.name,
+        id: customer.id,
+        name: customer.name,
       },
       items: orderData.items.map((item: OrderItem) => ({
         product: item.product,

@@ -1,5 +1,5 @@
 export interface Customer {
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -36,7 +36,5 @@ export interface OrderQueryParams {
   sortBy?: string;
   sortDir?: 'asc' | 'desc';
   search?: string;
-  filters?: {
-    status?: string;
-  };
+  status?: string;
 }
