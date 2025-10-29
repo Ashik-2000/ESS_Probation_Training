@@ -115,7 +115,7 @@ export class OrderFormComponent implements OnInit {
     const qty = itemGroup.get('qty')?.value || 0;
     const price = itemGroup.get('price')?.value || 0;
     const lineTotal = qty * price;
-    itemGroup.get('lineTotal')?.setValue(lineTotal, { emitEvent: false });
+    itemGroup.get('lineTotal')?.setValue(lineTotal);
 
     this.calculateGrandTotal();
   }
@@ -136,7 +136,7 @@ export class OrderFormComponent implements OnInit {
     const discountAmount = (subtotal * discountPercent) / 100;
     const grandTotal = subtotal + vatAmount - discountAmount;
 
-    this.orderForm.get('total')?.setValue(grandTotal, { emitEvent: false });
+    this.orderForm.get('total')?.setValue(grandTotal);
   }
 
   // ********** EditMode **********

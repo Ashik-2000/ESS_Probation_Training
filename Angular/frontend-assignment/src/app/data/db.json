@@ -279,6 +279,33 @@
       "total": 920,
       "status": "Completed",
       "date": "2025-10-29"
+    },
+    {
+      "id": "fe94",
+      "orderNo": "SO-2025-514",
+      "customer": {
+        "id": "7",
+        "name": "Atiqul Islam"
+      },
+      "items": [
+        {
+          "product": "Laptop",
+          "qty": 1,
+          "price": 800,
+          "vat": 15,
+          "discount": 0
+        },
+        {
+          "product": "Keyboard",
+          "qty": 1,
+          "price": 40,
+          "vat": 15,
+          "discount": 0
+        }
+      ],
+      "total": 966,
+      "status": "Pending",
+      "date": "2025-10-28"
     }
   ],
   "customers": [
@@ -305,6 +332,10 @@
     {
       "id": "6",
       "name": "Ashikul Islam"
+    },
+    {
+      "id": "7",
+      "name": "Atiqul Islam"
     }
   ],
   "products": [
