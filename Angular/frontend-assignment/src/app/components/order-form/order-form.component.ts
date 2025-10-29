@@ -88,7 +88,7 @@ export class OrderFormComponent implements OnInit {
     return new FormGroup({
       product: new FormControl('', Validators.required),
       qty: new FormControl(1, [Validators.required, Validators.min(1)]),
-      price: new FormControl(0, Validators.required),
+      price: new FormControl(0),
       lineTotal: new FormControl({ value: 0, disabled: true }),
     });
   }
@@ -109,7 +109,7 @@ export class OrderFormComponent implements OnInit {
     }
   }
 
-  // Update line total when qty or price changes and fire GrandTotal.
+  // Update line total when qty changes and fire GrandTotal.
   updateLineTotal(index: number): void {
     const itemGroup = this.items.at(index) as FormGroup;
     const qty = itemGroup.get('qty')?.value || 0;
