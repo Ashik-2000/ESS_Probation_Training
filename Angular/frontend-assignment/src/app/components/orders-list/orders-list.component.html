@@ -11,14 +11,14 @@
         type="text"
         class="form-control"
         placeholder="Search by customer name..."
-        [(ngModel)]="searchTerm"
+        [(ngModel)]="queryParams.search"
         (input)="onSearchChange()"
       />
     </div>
     <div class="col-md-3">
       <select
         class="form-select"
-        [(ngModel)]="selectedStatus"
+        [(ngModel)]="queryParams.status"
         (change)="onFilterChange()"
       >
         <option value="">All Status</option>
@@ -42,12 +42,12 @@
         <th>Customer</th>
         <th (click)="onSort('date')" class="sortable">
           Date
-          <span *ngIf="sortBy === 'date'">
+          <span *ngIf="queryParams.sortBy === 'date'">
             <i
               class="bi"
               [ngClass]="{
-                'bi-caret-up-fill': sortDir === 'asc',
-                'bi-caret-down-fill': sortDir === 'desc'
+                'bi-caret-up-fill': queryParams.sortDir === 'asc',
+                'bi-caret-down-fill': queryParams.sortDir === 'desc'
               }"
             ></i>
           </span>
@@ -95,19 +95,19 @@
   <!-- Pagination -->
   <div
     class="d-flex justify-content-between align-items-center mt-3"
-    *ngIf="totalRecords > pageSize"
+    *ngIf="totalRecords > queryParams.pageSize!"
   >
     <button
       class="btn btn-outline-success"
-      [disabled]="page === 1"
+      [disabled]="queryParams.page === 1"
       (click)="previousPage()"
     >
       Previous
     </button>
-    <span> Page {{ page }} </span>
+    <span> Page {{ queryParams.page }} </span>
     <button
       class="btn btn-outline-success"
-      [disabled]="page * pageSize >= totalRecords"
+      [disabled]="queryParams.page! * queryParams.pageSize! >= totalRecords"
       (click)="nextPage()"
     >
       Next

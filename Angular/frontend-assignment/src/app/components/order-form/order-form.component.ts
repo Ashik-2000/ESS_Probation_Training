@@ -224,9 +224,10 @@ export class OrderFormComponent implements OnInit {
 
     const orderData = this.orderForm.getRawValue();
     const customerName: string = orderData.customer.name.trim();
-    const existingCustomer = this.customers.find((customer) => {
-      customer.name.toLocaleLowerCase() === customerName.toLocaleLowerCase();
-    });
+    const existingCustomer = this.customers.find(
+      (customer) =>
+        customer.name.toLocaleLowerCase() === customerName.toLocaleLowerCase()
+    );
 
     if (existingCustomer) {
       // For Existing customer -> move directly
