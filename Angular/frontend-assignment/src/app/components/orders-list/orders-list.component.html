@@ -12,7 +12,7 @@
         class="form-control"
         placeholder="Search by customer name..."
         [ngModel]="queryParams.search"
-        (ngModelChange)="onSearchChange($event)"
+        (ngModelChange)="searchSubject.next($event)"
       />
     </div>
     <div class="col-md-3">

@@ -29,16 +29,16 @@ new set of values each time any of the input Observables emits something new. If
 emits error.
 
 pipe Operators:
-map() -> Receives individual item of a iterable
+map() -> Receives individual item 
 flatMap
 switchMap
 mergeMap
 exhaustMap
 takeUntil
-filter
-debounceTime
+filter() -> Decides if the responsive should reach to subscribe or not based on the condition. Only works on next, not on error or complete.
+debounceTime() -> Add a delay timer for reaching subscribe()
 distinct
-tap() -> Receives event
+tap() -> Only to get the response. Can't change the response. Used for console.log() inside the .pipe()
 delay
 finalize
 retry
