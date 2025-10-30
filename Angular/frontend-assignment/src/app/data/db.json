@@ -269,34 +269,20 @@
       },
       "items": [
         {
-          "product": "Mouse",
-          "qty": 1,
-          "price": 25,
-          "vat": 15,
-          "discount": 0
-        },
-        {
           "product": "Laptop",
           "qty": 1,
           "price": 800,
           "vat": 15,
           "discount": 0
-        },
-        {
-          "product": "Keyboard",
-          "qty": 2,
-          "price": 40,
-          "vat": 15,
-          "discount": 0
         }
       ],
-      "total": 1040.75,
+      "total": 920,
       "status": "Completed",
       "date": "2025-10-29"
     },
     {
       "id": "3354",
-      "orderNo": "SO-2025-236",
+      "orderNo": "SO-2025-3354",
       "customer": {
         "id": "5",
         "name": "Ashikur Rahman"
@@ -311,12 +297,12 @@
         }
       ],
       "total": 28.75,
-      "status": "Pending",
+      "status": "Cancelled",
       "date": "2025-10-30"
     },
     {
       "id": "033d",
-      "orderNo": "SO-2025-126",
+      "orderNo": "SO-2025-033d",
       "customer": {
         "id": "6",
         "name": "Rahat"
@@ -327,12 +313,52 @@
           "qty": 1,
           "price": 800,
           "vat": 15,
+          "discount": 1
+        }
+      ],
+      "total": 912,
+      "status": "Pending",
+      "date": "2025-11-01"
+    },
+    {
+      "id": "cfd4",
+      "orderNo": "SO-2025-461",
+      "customer": {
+        "id": "6",
+        "name": "Rahat"
+      },
+      "items": [
+        {
+          "product": "Keyboard",
+          "qty": 1,
+          "price": 40,
+          "vat": 0,
           "discount": 0
         }
       ],
-      "total": 920,
+      "total": 40,
       "status": "Pending",
-      "date": "2025-11-01"
+      "date": "2025-10-30"
+    },
+    {
+      "id": "b525",
+      "orderNo": "SO-2025-915",
+      "customer": {
+        "id": "4",
+        "name": "Ashikul Islam"
+      },
+      "items": [
+        {
+          "product": "Laptop",
+          "qty": 1,
+          "price": 800,
+          "vat": 0,
+          "discount": 0
+        }
+      ],
+      "total": 800,
+      "status": "Pending",
+      "date": "2025-10-30"
     }
   ],
   "customers": [

@@ -2,7 +2,23 @@
   <a class="navbar-brand" routerLink="/">Sales Order App</a>
 
   <div class="collapse navbar-collapse">
-    <ul class="navbar-nav ms-auto">
+    <ul class="navbar-nav ms-auto align-items-center">
+      <li class="nav-item me-4">
+        <div
+          class="d-flex align-items-center bg-success bg-opacity-25 rounded px-3 py-1"
+        >
+          <div class="text-white me-2">
+            <i class="bi bi-cash-stack fs-5"></i>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <div class="fw-semibold text-white-50 small">Total Sales</div>
+            <div class="fw-bold text-white fs-6">
+              {{ totalAmount | currency }}
+            </div>
+          </div>
+        </div>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link" routerLink="/orders" routerLinkActive="active"
           >Orders</a

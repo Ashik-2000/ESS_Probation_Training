@@ -7,6 +7,7 @@ import {
   Subject,
   Subscription,
 } from 'rxjs';
+import { TransferService } from 'src/app/services/transfer.service';
 import { Order, OrderQueryParams } from '../../interfaces/interfaces';
 import { OrderService } from '../../services/order.service';
 
@@ -16,10 +17,11 @@ import { OrderService } from '../../services/order.service';
   styleUrls: ['./orders-list.component.css'],
 })
 export class OrdersListComponent implements OnInit, OnDestroy {
+  totalOrders: Order[] = [];
   orders: Order[] = [];
   totalRecords = 0;
 
-  private searchSubject = new Subject<string>();
+  searchSubject = new Subject<string>();
   private searchSubscription!: Subscription;
 
   queryParams: OrderQueryParams = {
@@ -34,7 +36,8 @@ export class OrdersListComponent implements OnInit, OnDestroy {
   constructor(
     private orderService: OrderService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private transferService: TransferService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +57,9 @@ export class OrdersListComponent implements OnInit, OnDestroy {
   loadOrders(): void {
     this.orderService.getOrders().subscribe({
       next: (data) => {
+        this.totalOrders = [...data];
+        this.transferService.totalOrderAmount.next(this.totalOrders);
+
         let filteredData = [...data];
 
         // --- Search filter ---
@@ -93,12 +99,12 @@ export class OrdersListComponent implements OnInit, OnDestroy {
   handleSearchSubject(): void {
     this.searchSubscription = this.searchSubject
       .pipe(
-        // delay for 400ms 
+        // delay for 400ms
         debounceTime(400),
         distinctUntilChanged(),
         // if search term is 0 or >= 3 then the subscribe would called.
         filter(
-          (searchTerm) => searchTerm.length >= 3 || searchTerm.length === 0
+          (searchTerm) => searchTerm.length >= 1 || searchTerm.length === 0
         )
       )
       .subscribe((searchTerm) => {
@@ -127,12 +133,7 @@ export class OrdersListComponent implements OnInit, OnDestroy {
     });
   }
 
-  /** --- Action methods --- */
-  onSearchChange(searchValue: string) {
-    // Send the search term to the observable.
-    this.searchSubject.next(searchValue);
-  }
-
+  // On status params change
   onFilterChange() {
     this.queryParams.page = 1;
     this.updateQueryParams();
