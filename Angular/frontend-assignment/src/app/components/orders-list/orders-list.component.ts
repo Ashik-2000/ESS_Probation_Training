@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  Subject,
+  Subscription,
+} from 'rxjs';
 import { Order, OrderQueryParams } from '../../interfaces/interfaces';
 import { OrderService } from '../../services/order.service';
 
@@ -8,9 +15,12 @@ import { OrderService } from '../../services/order.service';
   templateUrl: './orders-list.component.html',
   styleUrls: ['./orders-list.component.css'],
 })
-export class OrdersListComponent implements OnInit {
+export class OrdersListComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   totalRecords = 0;
+
+  private searchSubject = new Subject<string>();
+  private searchSubscription!: Subscription;
 
   queryParams: OrderQueryParams = {
     page: 1,
@@ -28,19 +38,16 @@ export class OrdersListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Initializing the searchSubject listener
+    this.handleSearchSubject();
     // Read query params from URL on component load
-    this.route.queryParams.subscribe((params) => {
-      this.queryParams = {
-        page: +params['page'] || 1,
-        pageSize: +params['pageSize'] || 5,
-        sortBy: params['sortBy'] || 'date',
-        sortDir: params['sortDir'] || 'desc',
-        search: params['search'] || '',
-        status: params['status'] || '',
-      };
-
+    this.route.queryParams.subscribe(() => {
       this.loadOrders();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.searchSubscription.unsubscribe();
   }
 
   /** Fetch and filter data */
@@ -50,7 +57,7 @@ export class OrdersListComponent implements OnInit {
         let filteredData = [...data];
 
         // --- Search filter ---
-        if (this.queryParams.search?.trim()) {
+        if (this.queryParams.search) {
           filteredData = filteredData.filter((order) =>
             order.customer.name
               .toLowerCase()
@@ -82,6 +89,27 @@ export class OrdersListComponent implements OnInit {
     });
   }
 
+  // searchSubject listener function
+  handleSearchSubject(): void {
+    this.searchSubscription = this.searchSubject
+      .pipe(
+        // delay for 400ms 
+        debounceTime(400),
+        distinctUntilChanged(),
+        // if search term is 0 or >= 3 then the subscribe would called.
+        filter(
+          (searchTerm) => searchTerm.length >= 3 || searchTerm.length === 0
+        )
+      )
+      .subscribe((searchTerm) => {
+        // setting new search term
+        this.queryParams.search = searchTerm.trim();
+        this.queryParams.page = 1;
+        // updating the query params in the URL
+        this.updateQueryParams();
+      });
+  }
+
   /** Sorting logic */
   sortOrders(data: Order[], sortBy: string, sortDir: 'asc' | 'desc') {
     return data.sort((a: any, b: any) => {
@@ -100,9 +128,9 @@ export class OrdersListComponent implements OnInit {
   }
 
   /** --- Action methods --- */
-  onSearchChange() {
-    this.queryParams.page = 1;
-    this.updateQueryParams();
+  onSearchChange(searchValue: string) {
+    // Send the search term to the observable.
+    this.searchSubject.next(searchValue);
   }
 
   onFilterChange() {
@@ -154,7 +182,6 @@ export class OrdersListComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: this.queryParams,
-      queryParamsHandling: 'merge',
     });
   }
 

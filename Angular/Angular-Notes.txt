@@ -11,8 +11,24 @@ ngOnDestroy(){} --> Gets called after anything gets, destroyed or removed from t
 Observale Operators:
 .pipe() -> Method is to use operator.
 
-of
-from
+Creation operator:
+of -> The 'of' function allows us to create an Observable, which emits a set of values and completes. So, when we subscribe to such Observable, 
+all values that we have provided as arguments will be emitted immediately as next notifications, and then, the Observable will complete, ending the Subscription.
+
+from -> it can convert an array into an Observable. It works the same way as the 'of' creation function, however, in the case of 'from', you provide an array 
+with the values instead of providing multiple arguments. Another popular usage of 'from' is to create an Observable from Promise. Once we subscribe to such
+Observable, the Promise's resolve value will be emitted as a next notification and then it will complete. If the Promise gets rejected, the Observable will 
+emit an error notification. 'from' can also create Observables from other sources, like iterables (generator functions) and other Observable-like objects.
+
+forkJoin -> Accepts an array of observables as input. After all these Observables complete, it emits a set of latest values emitted by each of them and it 
+emits after all the observables are complete. Useful if you need to wait for the result of a couple of HTTP calls. If any of the input observables fails the 
+other ones get cancelled too, and emits error.
+
+combineLatest -> accepts an array of input Observables, to which it subscribes underneath, but contrary to 'forkJoin', the combineLatest's logic will emit a 
+new set of values each time any of the input Observables emits something new. If any of the input observables fails the  other ones get cancelled too. and 
+emits error.
+
+pipe Operators:
 map() -> Receives individual item of a iterable
 flatMap
 switchMap
@@ -22,8 +38,6 @@ takeUntil
 filter
 debounceTime
 distinct
-combineLatest
-forkJoin
 tap() -> Receives event
 delay
 finalize
@@ -143,3 +157,21 @@ Additional Requirements
 	Handle 404 (invalid route) gracefully.
 	Clean UI and responsive layout.
 
+
+Reactive-Form:
+
+orderForm
+├── customer (FormGroup)
+│    ├── id
+│    └── name
+├── items (FormArray)
+│    ├── [0]
+│    │     ├── product
+│    │     ├── qty
+│    │     ├── price
+│    │     └── lineTotal
+├── vat
+├── discount
+├── total
+├── status
+├── date
