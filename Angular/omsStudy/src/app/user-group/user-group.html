@@ -1,0 +1,35 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">User Groups</h4>
+    <button class="btn btn-primary" (click)="openModal()">+ Create User Group</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">User Group Name</th>
+          <th scope="col" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example static rows -->
+        @for (item of userGroup(); track item.id) {
+        <tr>
+          <td>{{ item.name }}</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-outline-secondary me-2">Edit</button>
+            <button class="btn btn-sm btn-outline-danger">Delete</button>
+          </td>
+        </tr>
+        }
+        <!-- If there are no user groups -->
+        @if (userGroup().length === 0) {
+        <tr>
+          <td colspan="2" class="text-center text-muted">No user groups found</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
