@@ -11,6 +11,13 @@ export class UserGroupService {
     return this.http.get<userGroup[]>('http://localhost:3000/userGroups');
   }
   createUserGroup(name: string) {
-    return this.http.post('http://localhost:3000/userGroups', { name, status: 'Active' });
+    return this.http.post<void>('http://localhost:3000/userGroups', { name, status: 'Active' });
+  }
+
+  updateUserGroup(id: string, data: userGroup) {
+    return this.http.put<void>(`http://localhost:3000/userGroups/${id}`, data);
+  }
+  deleteUserGroup(id: string) {
+    return this.http.delete<void>(`http://localhost:3000/userGroups/${id}`);
   }
 }

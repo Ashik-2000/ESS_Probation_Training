@@ -15,23 +15,36 @@ export class UserGroup {
   private modalService = inject(BsModalService);
   refresh = signal(0);
 
-  constructor() { }
-  
+  constructor() {}
+
   userGroupList = derivedAsync(() => {
     this.refresh();
     return this.userGroupService.getUserGroupList();
   });
   userGroup = computed(() => this.userGroupList() ?? []);
 
-  openModal() {
-    const itialState = {
-      name: 'Ashik',
-    };
+  createUserGroup() {
     const modalRef = this.modalService.show(UserGroupModal);
     modalRef.content?.confirmPOST.subscribe((result) => {
       if (result.confirm) {
         this.refresh.update((prev) => prev + 1);
       }
+    });
+  }
+
+  editUserGroup(id: string | undefined) {
+    const user = this.userGroup().find((user) => user.id === id);
+    const initialState = {
+      ...user,
+    };
+    console.log(initialState);
+    const modalRef = this.modalService.show(UserGroupModal, { initialState });
+  }
+
+  onDelete(id: string | undefined) {
+    this.userGroupService.deleteUserGroup(id!).subscribe({
+      next: () => this.refresh.update((prev) => prev + 1),
+      error: (er) => console.error('Could not deleted', er),
     });
   }
 }

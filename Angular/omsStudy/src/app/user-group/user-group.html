@@ -1,7 +1,7 @@
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0">User Groups</h4>
-    <button class="btn btn-primary" (click)="openModal()">+ Create User Group</button>
+    <button class="btn btn-primary" (click)="createUserGroup()">+ Create User Group</button>
   </div>
 
   <div class="table-responsive">
@@ -18,8 +18,12 @@
         <tr>
           <td>{{ item.name }}</td>
           <td class="text-center">
-            <button class="btn btn-sm btn-outline-secondary me-2">Edit</button>
-            <button class="btn btn-sm btn-outline-danger">Delete</button>
+            <button class="btn btn-sm btn-outline-secondary me-2" (click)="editUserGroup(item.id)">
+              Edit
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="onDelete(item.id)">
+              Delete
+            </button>
           </td>
         </tr>
         }

@@ -10,6 +10,10 @@ import { UserGroupService } from '../../../services/userGroup.service';
   styleUrl: './user-group-modal.css',
 })
 export class UserGroupModal {
+  id?: string;
+  name!: string;
+  status!: 'Active' | 'Inactive';
+
   modalRef = inject(BsModalRef);
   userGroupService = inject(UserGroupService);
 
@@ -23,6 +27,11 @@ export class UserGroupModal {
 
   onSubmit() {
     const name = this.form.controls.name.value.trim();
+    
+    this.createNew(name);
+  }
+
+  createNew(name: string) {
     this.userGroupService.createUserGroup(name).subscribe({
       next: () => {
         this.confirmPOST.emit({ confirm: true });
