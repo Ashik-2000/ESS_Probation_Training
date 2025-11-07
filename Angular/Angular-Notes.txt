@@ -12,31 +12,31 @@ Observale Operators:
 .pipe() -> Method is to use operator.
 
 Creation operator:
-of -> The 'of' function allows us to create an Observable, which emits a set of values and completes. So, when we subscribe to such Observable, 
+of() -> The 'of' function allows us to create an Observable, which emits a set of values and completes. So, when we subscribe to such Observable, 
 all values that we have provided as arguments will be emitted immediately as next notifications, and then, the Observable will complete, ending the Subscription.
 
-from -> it can convert an array into an Observable. It works the same way as the 'of' creation function, however, in the case of 'from', you provide an array 
+from() -> it can convert an array into an Observable. It works the same way as the 'of' creation function, however, in the case of 'from', you provide an array 
 with the values instead of providing multiple arguments. Another popular usage of 'from' is to create an Observable from Promise. Once we subscribe to such
 Observable, the Promise's resolve value will be emitted as a next notification and then it will complete. If the Promise gets rejected, the Observable will 
 emit an error notification. 'from' can also create Observables from other sources, like iterables (generator functions) and other Observable-like objects.
 
-forkJoin -> Accepts an array of observables as input. After all these Observables complete, it emits a set of latest values emitted by each of them and it 
+forkJoin() -> Accepts an array of observables as input. After all these Observables complete, it emits a set of latest values emitted by each of them and it 
 emits after all the observables are complete. Useful if you need to wait for the result of a couple of HTTP calls. If any of the input observables fails the 
 other ones get cancelled too, and emits error.
 
-combineLatest -> accepts an array of input Observables, to which it subscribes underneath, but contrary to 'forkJoin', the combineLatest's logic will emit a 
+combineLatest() -> accepts an array of input Observables, to which it subscribes underneath, but contrary to 'forkJoin', the combineLatest's logic will emit a 
 new set of values each time any of the input Observables emits something new. If any of the input observables fails the  other ones get cancelled too. and 
 emits error.
 
 pipe Operators:
-map() -> Receives individual item 
+map() -> To change item by doing some operation and send to the subscribe()
 flatMap
 switchMap
 mergeMap
 exhaustMap
 takeUntil
 filter() -> Decides if the responsive should reach to subscribe or not based on the condition. Only works on next, not on error or complete.
-debounceTime() -> Add a delay timer for reaching subscribe()
+debounceTime() -> Add a delay timer for reaching subscribe(). error and complete notification pass through immediately, no delay.
 distinct
 tap() -> Only to get the response. Can't change the response. Used for console.log() inside the .pipe()
 delay
@@ -175,3 +175,355 @@ orderForm
 ├── total
 ├── status
 ├── date
+
+
+<form>
+  <div class="p-0">
+    <!-- <h4>Add New Customer</h4> -->
+    <h5>Company Details</h5>
+    <div class="row">
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="companyName" class="form-label"
+            >Company Name <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            id="companyName"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="qbDisplayName" class="form-label">QB Display Name</label>
+          <input
+            type="text"
+            id="qbDisplayName"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+          <input
+            type="text"
+            id="email"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="altEmail" class="form-label">Alt Email</label>
+          <input
+            type="text"
+            id="altEmail"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+          <input
+            type="number"
+            id="phone"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="altPhone" class="form-label">Alt Phone</label>
+          <input
+            type="number"
+            id="altPhone"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="website" class="form-label">Website</label>
+          <input
+            type="text"
+            id="website"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="account" class="form-label">Account Type</label>
+          <ng-select
+            class="form-control form-control-lg"
+            [items]="['Credit', 'Cash']"
+            bindLabel="type"
+            placeholder="Select Account Type"
+          >
+          </ng-select>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="accountNo" class="form-label">Account No.</label>
+          <input
+            type="number"
+            id="accountNo"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="accountName" class="form-label">Account Name</label>
+          <input
+            type="text"
+            id="accountName"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="account" class="form-label">Sales Operative</label>
+          <ng-select
+            class="form-control form-control-lg"
+            [items]="['Sarah Connor', 'Tom Brady', 'Mike Ross']"
+            bindLabel="type"
+            placeholder="Select Sales Operative"
+          >
+          </ng-select>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-3">
+        <div class="form-group">
+          <label for="accountNumber" class="form-label">Account Number</label>
+          <input
+            type="text"
+            id="accountNumber"
+            class="form-control form-control-lg"
+            placeholder="Auto-generated"
+            disabled
+          />
+        </div>
+      </div>
+      <div class="col-lg-6 mt-3">
+        <div class="row">
+          <div class="col-md-12">
+            <h5>Billing Address</h5>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label for="billingAddress" class="form-label">Search Address/Eircode</label>
+              <div class="append-input">
+                <div class="left-icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="m-0">
+                    <use href="assets/sprite.svg#svg-search"></use>
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  id="billingAddress"
+                  class="form-control form-control-lg"
+                  placeholder="Type Here"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label for="streetAddress" class="form-label">Street Address</label>
+              <textarea
+                id="streetAddress"
+                class="form-control form-control-lg"
+                rows="3"
+                placeholder="Type Here"
+              ></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label for="city" class="form-label">City</label>
+              <input
+                type="text"
+                id="city"
+                class="form-control form-control-lg"
+                placeholder="Type Here"
+              />
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label for="postCode" class="form-label">Post Code</label>
+              <input
+                type="text"
+                id="postCode"
+                class="form-control form-control-lg"
+                placeholder="Type Here"
+              />
+            </div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label for="country" class="form-label">Country</label>
+              <ng-select
+                class="form-control form-control-lg"
+                [items]="['Ireland', 'United Kingdom', 'France', 'Germany']"
+                bindLabel="type"
+                placeholder="Select Country"
+              >
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mt-3">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5>Shipping Address</h5>
+              <div class="switch-wrapper">
+                <input type="checkbox" id="copyBilling" class="d-none" />
+                <label for="copyBilling" class="switch">Copy Billing to Shipping</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label for="shippingAddress" class="form-label">Search Address/Eircode</label>
+              <div class="append-input">
+                <div class="left-icon">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="m-0">
+                    <use href="assets/sprite.svg#svg-search"></use>
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  id="billingAddress"
+                  class="form-control form-control-lg"
+                  placeholder="Type Here"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label for="streetAddress" class="form-label">Street Address</label>
+              <textarea
+                id="streetAddress"
+                class="form-control form-control-lg"
+                rows="3"
+                placeholder="Type Here"
+              ></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label for="city" class="form-label">City</label>
+              <input
+                type="text"
+                id="city"
+                class="form-control form-control-lg"
+                placeholder="Type Here"
+              />
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="form-group">
+              <label for="postCode" class="form-label">Post Code</label>
+              <input
+                type="text"
+                id="postCode"
+                class="form-control form-control-lg"
+                placeholder="Type Here"
+              />
+            </div>
+          </div>
+          <div class="col-md-12 mb-3">
+            <div class="form-group">
+              <label for="country" class="form-label">Country</label>
+              <ng-select
+                class="form-control form-control-lg"
+                [items]="['Ireland', 'United Kingdom', 'France', 'Germany']"
+                bindLabel="type"
+                placeholder="Select Country"
+              >
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 mt-3">
+        <h5>Primary Contact</h5>
+      </div>
+      <div class="col-lg-6 mb-3">
+        <div class="form-group">
+          <label for="firstName" class="form-label">Name <span class="text-danger">*</span></label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6 mb-3">
+        <div class="form-group">
+          <label for="position" class="form-label">Position</label>
+          <input
+            type="text"
+            id="position"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6 mb-3">
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+          <input
+            type="number"
+            id="phone"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6 mb-3">
+        <div class="form-group">
+          <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+          <input
+            type="text"
+            id="email"
+            class="form-control form-control-lg"
+            placeholder="Type Here"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="position-sticky bottom-0 bg-white py-3 d-flex justify-content-end gap-3 mt-5">
+  <a
+    href="javascript:void(0)"
+    routerLink="/pages/customers/list"
+    type="button"
+    class="btn btn-lg btn-danger-outline"
+    >Cancel</a
+  >
+  <button type="button" class="btn btn-lg theme-btn">
+    {{ isEditMode() ? 'Update Customer' : 'Save Customer' }}
+  </button>
+</div>
