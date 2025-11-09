@@ -1,0 +1,64 @@
+{
+  "userGroups": [
+    {
+      "id": "1",
+      "name": "Admin Group",
+      "status": "Active"
+    },
+    {
+      "id": "2",
+      "name": "HR Department",
+      "status": "Inactive"
+    },
+    {
+      "id": "3",
+      "name": "Developers Team",
+      "status": "Active"
+    },
+    {
+      "id": "4",
+      "name": "QA Team",
+      "status": "Active"
+    },
+    {
+      "id": "5",
+      "name": "Finance Group",
+      "status": "Inactive"
+    },
+    {
+      "id": "6",
+      "name": "Support Team",
+      "status": "Active"
+    },
+    {
+      "id": "7",
+      "name": "Marketing Group",
+      "status": "Inactive"
+    },
+    {
+      "id": "8",
+      "name": "Project Managers",
+      "status": "Active"
+    },
+    {
+      "id": "9",
+      "name": "Interns",
+      "status": "Inactive"
+    },
+    {
+      "id": "10",
+      "name": "Research & Development",
+      "status": "Active"
+    },
+    {
+      "id": "e70b",
+      "name": "ASHIK",
+      "status": "Active"
+    },
+    {
+      "id": "15a2",
+      "name": "RAHAT",
+      "status": "Active"
+    }
+  ]
+}
