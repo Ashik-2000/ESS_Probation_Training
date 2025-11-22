@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { User } from './user';
+import { ExcelDownload } from './excel-download';
 
-describe('User', () => {
-  let component: User;
-  let fixture: ComponentFixture<User>;
+describe('ExcelDownload', () => {
+  let component: ExcelDownload;
+  let fixture: ComponentFixture<ExcelDownload>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [User]
+      imports: [ExcelDownload]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(User);
+    fixture = TestBed.createComponent(ExcelDownload);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

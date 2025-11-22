@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from './header/header';
-import { UserComponent } from './user/user';
+import { ExcelDownload } from './components/excel-download/excel-download';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, UserComponent],
+  imports: [ExcelDownload],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

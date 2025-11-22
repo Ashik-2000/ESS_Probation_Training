@@ -1,0 +1,32 @@
+.page-center {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Professional gradient download button */
+.download-btn {
+  padding: 10px 28px;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 8px; /* subtle, not bubbly */
+  background: linear-gradient(135deg, #4b79a1, #283e51); /* clean corporate vibe */
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Elegant hover effect */
+.download-btn:hover {
+  background: linear-gradient(135deg, #547a97, #1f3342);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+
+/* Subtle click feedback */
+.download-btn:active {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transform: translateY(1px);
+}
